@@ -1,0 +1,1284 @@
+<!DOCTYPE html>
+<html lang="vi" class="h-full bg-slate-50">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iry Profile Cute - Studio</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+
+    <!-- TailwindCSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#FDF2F5',
+                            100: '#FCE7ED',
+                            200: '#FBCFE0',
+                            300: '#F7A7C4',
+                            400: '#F275A3',
+                            500: '#FF5E8E',
+                            600: '#E04875',
+                            700: '#C2325E',
+                            800: '#9E244B',
+                            900: '#5C3243',
+                        },
+                        pastel: {
+                            pink: '#FFE5EC',
+                            rose: '#F7CAD6',
+                            lavender: '#EDE9FE',
+                            cream: '#FEF3C7',
+                            mint: '#D1FAE5',
+                            sky: '#E0F2FE'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        cute: ['Comfortaa', 'cursive']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* Custom scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.03);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #F7CAD6;
+            border-radius: 999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FF5E8E;
+        }
+
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
+            opacity: 0;
+        }
+        .accordion-item.open .accordion-content {
+            max-height: 1800px;
+            opacity: 1;
+        }
+        .accordion-item.open .accordion-chevron {
+            transform: rotate(180deg);
+        }
+
+        .device-preview-wrapper {
+            transition: width 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), max-width 0.35s ease;
+        }
+
+        .toast-slide {
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .toast-slide.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Visual Click-to-Edit Pulsing Glow Animation */
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 94, 142, 0.7);
+                border-color: #FF5E8E;
+                background-color: #FFF1F5;
+                transform: scale(1.02);
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(255, 94, 142, 0);
+                border-color: #FF5E8E;
+                background-color: #FFF1F5;
+                transform: scale(1.02);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 94, 142, 0);
+                transform: scale(1);
+            }
+        }
+        .field-focus-highlight {
+            animation: pulseGlow 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards !important;
+            border-color: #FF5E8E !important;
+        }
+    </style>
+</head>
+<body class="h-full font-sans text-slate-800 antialiased flex flex-col selection:bg-brand-100 selection:text-brand-900">
+
+    <!-- TOP HEADER -->
+    <header class="h-16 bg-white border-b border-slate-200/80 px-4 md:px-6 flex items-center justify-between flex-shrink-0 z-30 shadow-sm">
+        <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-500 to-rose-400 flex items-center justify-center text-white text-lg font-bold shadow-md shadow-brand-500/20">
+                🌸
+            </div>
+            <div>
+                <div class="flex items-center gap-2">
+                    <h1 class="font-cute font-bold text-lg text-slate-800 tracking-tight">IRY STUDIO</h1>
+                    <span class="text-[10px] font-extrabold uppercase px-2 py-0.5 rounded-full bg-brand-50 text-brand-600 border border-brand-200">CMS v2.0</span>
+                </div>
+                <p class="text-xs text-slate-400">Giao diện quản trị visual cho trang cá nhân Streamer</p>
+            </div>
+        </div>
+
+        <!-- Mobile View Switcher (Tab Buttons) -->
+        <div class="flex lg:hidden bg-slate-100 p-1 rounded-xl border border-slate-200 text-xs font-semibold">
+            <button id="mobileTabEdit" onclick="switchMobileTab('edit')" class="px-3 py-1.5 rounded-lg bg-white shadow-sm text-brand-600">
+                <i class="fa-solid fa-pen-to-square mr-1"></i> Chỉnh sửa
+            </button>
+            <button id="mobileTabPreview" onclick="switchMobileTab('preview')" class="px-3 py-1.5 rounded-lg text-slate-500 hover:text-slate-800">
+                <i class="fa-solid fa-mobile-screen mr-1"></i> Xem trước
+            </button>
+        </div>
+
+        <!-- Right Quick Actions -->
+        <div class="hidden sm:flex items-center gap-2.5">
+            <button onclick="exportJsonConfig()" title="Tải file JSON dự phòng" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-slate-900 transition flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-download text-slate-400"></i> Xuất JSON
+            </button>
+            <button onclick="resetToDefaults()" title="Khôi phục dữ liệu ban đầu" class="px-3 py-1.5 rounded-xl border border-slate-200 text-xs font-semibold text-slate-600 hover:bg-slate-50 hover:text-rose-600 transition flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-arrow-rotate-left text-slate-400"></i> Khôi phục
+            </button>
+            <a href="./index.html" target="_blank" class="px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-semibold transition flex items-center gap-1.5 shadow-sm">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i> Mở Web Thật
+            </a>
+        </div>
+    </header>
+
+    <!-- MAIN BODY (SPLIT-SCREEN ON DESKTOP) -->
+    <div class="flex-1 flex overflow-hidden">
+
+        <!-- ===================================================================
+             LEFT PANEL: CONTROL PANEL (THE FORMS) — 45% WIDTH
+             =================================================================== -->
+        <div id="leftControlPanel" class="w-full lg:w-[45%] h-full bg-white border-r border-slate-200 flex flex-col flex-shrink-0 z-20">
+            
+            <!-- Scrollable Accordion Area -->
+            <div class="flex-1 overflow-y-auto p-4 md:p-6 space-y-3.5">
+
+                <!-- SECTION 1: GENERAL INFO -->
+                <div class="accordion-item open border border-slate-200/90 rounded-2xl bg-white shadow-sm overflow-hidden transition-all duration-200 hover:border-brand-200">
+                    <button class="w-full px-5 py-4 flex items-center justify-between text-left bg-gradient-to-r from-slate-50/80 to-white hover:bg-brand-50/40 transition" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-xl bg-pink-100 text-pink-600 flex items-center justify-center text-sm font-bold shadow-inner">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm text-slate-800">Section 1: General Info</h3>
+                                <p class="text-[11px] text-slate-400">Avatar, Nickname &amp; Mạng xã hội</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs accordion-chevron transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5 ml-1">Avatar Image URL / Upload</label>
+                                <div class="relative flex gap-2">
+                                    <div class="relative flex-1">
+                                        <i class="fa-solid fa-image absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                                        <input type="text" id="inputAvatarUrl" oninput="updateField('profile.avatar', this.value)" placeholder="assets/image/avatar.jpg" class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                                    </div>
+                                    <button onclick="document.getElementById('avatarUploadInput').click()" class="px-3 py-2 bg-brand-50 text-brand-600 rounded-xl text-xs font-bold hover:bg-brand-100 transition whitespace-nowrap">
+                                        <i class="fa-solid fa-upload"></i> Tải ảnh
+                                    </button>
+                                    <input type="file" id="avatarUploadInput" accept="image/*" class="hidden" onchange="handleMainAvatarUpload(event)">
+                                </div>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Streamer Nickname / Tên</label>
+                                    <input type="text" id="inputNickname" oninput="updateField('profile.name', this.value)" placeholder="iry bae" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1.5">Châm ngôn / Quote</label>
+                                    <input type="text" id="inputQuote" oninput="updateField('profile.quote', this.value)" placeholder="if it's meant to be..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                                </div>
+                            </div>
+
+                            <!-- Dynamic Social Links -->
+                            <div class="pt-2 border-t border-slate-100">
+                                <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider mb-2.5">Social Links / Mạng Xã Hội</label>
+                                
+                                <!-- Presets Mạng xã hội nổi tiếng -->
+                                <div class="mb-3 bg-slate-50/80 p-2.5 rounded-xl border border-slate-200/60">
+                                    <div class="text-[10px] font-bold text-slate-500 mb-2 uppercase tracking-wide">Thêm nhanh mẫu phổ biến:</div>
+                                    <div class="flex flex-wrap gap-2">
+                                        <button onclick="addPresetSocial('TikTok', 'https://tiktok.com/')" class="preset-btn" style="background:#000; color:#fff;"><i class="fa-brands fa-tiktok"></i> TikTok</button>
+                                        <button onclick="addPresetSocial('YouTube', 'https://youtube.com/')" class="preset-btn" style="background:#FF0000; color:#fff;"><i class="fa-brands fa-youtube"></i> YouTube</button>
+                                        <button onclick="addPresetSocial('Instagram', 'https://instagram.com/')" class="preset-btn" style="background:linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); color:#fff;"><i class="fa-brands fa-instagram"></i> Instagram</button>
+                                        <button onclick="addPresetSocial('Facebook', 'https://facebook.com/')" class="preset-btn" style="background:#1877F2; color:#fff;"><i class="fa-brands fa-facebook"></i> Facebook</button>
+                                        <button onclick="addPresetSocial('Discord', 'https://discord.gg/')" class="preset-btn" style="background:#5865F2; color:#fff;"><i class="fa-brands fa-discord"></i> Discord</button>
+                                        <button onclick="addPresetSocial('Spotify', 'https://spotify.com/')" class="preset-btn" style="background:#1DB954; color:#fff;"><i class="fa-brands fa-spotify"></i> Spotify</button>
+                                    </div>
+                                </div>
+
+                                <div id="socialsListContainer" class="space-y-2.5">
+                                    <!-- Rendered dynamically by JS -->
+                                </div>
+                                <button onclick="addNewSocialItem()" type="button" class="mt-3 w-full py-2 px-4 rounded-xl border-2 border-dashed border-brand-200 hover:border-brand-400 text-brand-600 bg-brand-50/50 hover:bg-brand-50 text-xs font-bold transition flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-plus"></i> Thêm Link Trống Khác
+                                </button>
+                                <style>
+                                    .preset-btn { font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 8px; transition: all 0.2s; display: flex; align-items: center; gap: 4px; border:none; cursor:pointer; }
+                                    .preset-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 6px rgba(0,0,0,0.15); filter: brightness(1.1); }
+                                </style>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 2: OUR STORY -->
+                <div class="accordion-item border border-slate-200/90 rounded-2xl bg-white shadow-sm overflow-hidden transition-all duration-200 hover:border-brand-200">
+                    <button class="w-full px-5 py-4 flex items-center justify-between text-left bg-gradient-to-r from-slate-50/80 to-white hover:bg-brand-50/40 transition" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-sm font-bold shadow-inner">
+                                <i class="fa-solid fa-book-open"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm text-slate-800">Section 2: Our Story</h3>
+                                <p class="text-[11px] text-slate-400">Tiêu đề chương &amp; Câu chuyện giới thiệu</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs accordion-chevron transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Chapter Title</label>
+                                <input type="text" id="inputStoryTitle" oninput="updateField('chapters.chapter1.title', this.value)" placeholder="About iry bae" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Story Content (Đoạn văn giới thiệu)</label>
+                                <textarea id="inputStoryContent" rows="4" oninput="updateField('chapters.chapter1.desc', this.value)" placeholder="Streamer, Artist & Content Creator who loves dreamy pastel hues..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition leading-relaxed"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Lời mở đầu Prologue (Khi vào trang)</label>
+                                <textarea id="inputPrologueQuote" rows="2" oninput="updateField('chapters.prologue.quote', this.value)" placeholder="Every day is a sweet little diary page waiting to unfold..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 3: PLAY WITH ME (GAMES) -->
+                <div class="accordion-item border border-slate-200/90 rounded-2xl bg-white shadow-sm overflow-hidden transition-all duration-200 hover:border-brand-200">
+                    <button class="w-full px-5 py-4 flex items-center justify-between text-left bg-gradient-to-r from-slate-50/80 to-white hover:bg-brand-50/40 transition" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-sm font-bold shadow-inner">
+                                <i class="fa-solid fa-gamepad"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm text-slate-800">Section 3: Play With Me (Games)</h3>
+                                <p class="text-[11px] text-slate-400">Danh sách các tựa game &amp; Highlight video</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs accordion-chevron transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-5 pt-2 border-t border-slate-100 space-y-4">
+                            
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Game Section Title / Tiêu đề chính</label>
+                                <input type="text" id="inputGameSectionTitle" oninput="updateField('chapters.chapter2.title', this.value)" placeholder="Game Highlights & Streams" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Mô tả Section Game</label>
+                                <textarea id="inputGameSectionDesc" rows="2" oninput="updateField('chapters.chapter2.desc', this.value)" placeholder="Click bất kỳ tựa game dễ thương bên dưới để xem lại..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition leading-relaxed"></textarea>
+                            </div>
+
+                            <hr class="border-slate-100 my-4">
+
+                            <!-- Dynamic Games Container -->
+                            <div id="gamesListContainer" class="space-y-3">
+                                <!-- Rendered dynamically by JS -->
+                            </div>
+
+                            <!-- Add Game Button -->
+                            <button onclick="addNewGameItem()" type="button" class="w-full py-2.5 px-4 rounded-xl border-2 border-dashed border-brand-200 hover:border-brand-400 text-brand-600 bg-brand-50/50 hover:bg-brand-50 text-xs font-bold transition flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-plus"></i> Thêm Tựa Game Mới (Add New Game)
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 4: MELODIES -->
+                <div class="accordion-item border border-slate-200/90 rounded-2xl bg-white shadow-sm overflow-hidden transition-all duration-200 hover:border-brand-200">
+                    <button class="w-full px-5 py-4 flex items-center justify-between text-left bg-gradient-to-r from-slate-50/80 to-white hover:bg-brand-50/40 transition" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-xl bg-teal-100 text-teal-600 flex items-center justify-center text-sm font-bold shadow-inner">
+                                <i class="fa-solid fa-music"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm text-slate-800">Section 4: Melodies</h3>
+                                <p class="text-[11px] text-slate-400">Lo-Fi Playlist &amp; Nhạc thư giãn</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs accordion-chevron transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Playlist Title / Tiêu đề danh sách phát</label>
+                                <input type="text" id="inputMusicTitle" oninput="updateField('chapters.chapter3.title', this.value)" placeholder="Cozy Melodies" class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Featured YouTube / Spotify Link</label>
+                                <div class="relative">
+                                    <input type="text" id="inputMusicEmbed" oninput="updateFeaturedMusicEmbed(this.value)" placeholder="https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1" class="w-full pl-9 pr-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                                    <i class="fa-solid fa-link absolute left-3 top-2.5 text-slate-400 text-xs"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Mô tả danh sách nhạc</label>
+                                <input type="text" id="inputMusicDesc" oninput="updateField('chapters.chapter3.desc', this.value)" placeholder="Bản nhạc thư giãn mỗi chiều trà thơm..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SECTION 5: DONATE & SWEET NOTE -->
+                <div class="accordion-item border border-slate-200/90 rounded-2xl bg-white shadow-sm overflow-hidden transition-all duration-200 hover:border-brand-200">
+                    <button class="w-full px-5 py-4 flex items-center justify-between text-left bg-gradient-to-r from-slate-50/80 to-white hover:bg-brand-50/40 transition" onclick="toggleAccordion(this)">
+                        <div class="flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-sm font-bold shadow-inner">
+                                <i class="fa-solid fa-heart"></i>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-sm text-slate-800">Section 5: Donate &amp; Sweet Note</h3>
+                                <p class="text-[11px] text-slate-400">Thư gửi fan, Mã QR &amp; Tài khoản Ngân hàng</p>
+                            </div>
+                        </div>
+                        <i class="fa-solid fa-chevron-down text-slate-400 text-xs accordion-chevron transition-transform duration-300"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-5 pt-2 border-t border-slate-100 space-y-4">
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Nội dung Thư tay (Handwritten Letter)</label>
+                                <textarea id="inputSweetLetter" rows="3" oninput="updateField('chapters.chapter4.letter', this.value)" placeholder="Gửi những người bạn đáng yêu của iry bae..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition leading-relaxed"></textarea>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-bold text-slate-700 mb-1.5">Lời nhắn bên dưới (Bottom Note)</label>
+                                <textarea id="inputSweetNote" rows="2" oninput="updateField('chapters.chapter4.desc', this.value)" placeholder="Cảm ơn các bạn rất nhiều vì đã ghé thăm góc nhỏ bình yên này..." class="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition leading-relaxed"></textarea>
+                            </div>
+
+                            <div class="pt-2 border-t border-slate-100 space-y-3">
+                                <label class="block text-xs font-extrabold text-slate-500 uppercase tracking-wider">Thông Tin Ủng Hộ &amp; Donate</label>
+                                
+                                <div class="flex items-center gap-4 mb-4 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                    <div class="relative w-16 h-16 rounded-xl border-2 border-dashed border-slate-300 overflow-hidden group cursor-pointer shrink-0" onclick="document.getElementById('inputQrImageUpload').click()">
+                                        <img id="previewQrImage" src="" class="w-full h-full object-cover hidden">
+                                        <div class="absolute inset-0 flex flex-col items-center justify-center group-hover:bg-slate-200/50 transition" id="placeholderQrImage">
+                                            <i class="fa-solid fa-qrcode text-slate-400 text-xl"></i>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Upload Ảnh Mã QR (VietQR/Momo)</label>
+                                        <p class="text-[10px] text-slate-500 mb-2">Tự tải lên mã QR ngân hàng của bạn. Nếu trống sẽ tự tạo QR từ Link.</p>
+                                        <button type="button" onclick="document.getElementById('inputQrImageUpload').click()" class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-700 text-xs font-bold hover:bg-slate-50 transition shadow-sm">
+                                            <i class="fa-solid fa-upload mr-1 text-brand-500"></i> Chọn Ảnh QR
+                                        </button>
+                                        <input type="file" id="inputQrImageUpload" accept="image/png, image/jpeg, image/webp" class="hidden" onchange="handleQrUpload(event)">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Hoặc Link QR Tự Tạo (Dùng nếu không upload ảnh)</label>
+                                    <input type="text" id="inputQrData" oninput="updateField('donate.qr_data', this.value)" placeholder="https://meowy-sanctuary.irybae.com/donate" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                                </div>
+
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Tên Ngân Hàng (Bank Name)</label>
+                                        <input type="text" id="inputBankName" oninput="updateField('donate.bank_name', this.value)" placeholder="MB Bank" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Chủ Tài Khoản (Account Name)</label>
+                                        <input type="text" id="inputBankOwner" oninput="updateField('donate.bank_owner', this.value)" placeholder="BUI THI IRY" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Số Tài Khoản (Account Number)</label>
+                                    <input type="text" id="inputBankAccount" oninput="updateField('donate.bank_account', this.value)" placeholder="8888.6666.9999" class="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 focus:bg-white transition">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- STICKY BOTTOM SAVE ACTION BAR -->
+            <div class="p-4 bg-white border-t border-slate-200/90 flex items-center justify-between gap-3 shadow-[0_-4px_20px_rgba(0,0,0,0.03)] z-30">
+                <div class="flex items-center gap-2 text-xs text-slate-500">
+                    <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    <span id="saveStatusText">Sẵn sàng lưu</span>
+                </div>
+                <button onclick="saveAllChanges()" type="button" class="px-6 py-2.5 rounded-xl bg-gradient-to-r from-brand-500 via-rose-500 to-brand-600 hover:from-brand-600 hover:to-brand-700 text-white font-bold text-xs shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40 hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-floppy-disk text-sm"></i> SAVE CHANGES
+                </button>
+            </div>
+        </div>
+
+        <!-- ===================================================================
+             RIGHT PANEL: LIVE PREVIEW PANEL — 55% WIDTH
+             =================================================================== -->
+        <div id="rightPreviewPanel" class="hidden lg:flex flex-1 h-full bg-slate-100/90 flex-col overflow-hidden">
+            
+            <!-- Viewport Device Switcher Bar -->
+            <div class="h-12 bg-white/90 backdrop-blur border-b border-slate-200/80 px-4 flex items-center justify-between flex-shrink-0 z-10 shadow-sm">
+                
+                <div class="flex items-center gap-1.5 bg-slate-100 p-1 rounded-xl border border-slate-200/80">
+                    <button onclick="setDeviceViewport('desktop')" id="btnViewDesktop" class="px-2.5 py-1 rounded-lg bg-white shadow-xs text-slate-800 text-xs font-bold transition flex items-center gap-1.5" title="Màn hình Desktop (100%)">
+                        <i class="fa-solid fa-laptop text-brand-500"></i> Desktop
+                    </button>
+                    <button onclick="setDeviceViewport('tablet')" id="btnViewTablet" class="px-2.5 py-1 rounded-lg text-slate-500 hover:text-slate-800 text-xs font-semibold transition flex items-center gap-1.5" title="Màn hình Tablet (768px)">
+                        <i class="fa-solid fa-tablet-screen-button"></i> Tablet
+                    </button>
+                    <button onclick="setDeviceViewport('mobile')" id="btnViewMobile" class="px-2.5 py-1 rounded-lg text-slate-500 hover:text-slate-800 text-xs font-semibold transition flex items-center gap-1.5" title="Màn hình Mobile (414px)">
+                        <i class="fa-solid fa-mobile-screen"></i> Mobile
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span id="previewResolutionText" class="text-[11px] font-mono font-medium text-slate-400">100% Fluid Width</span>
+                    <button onclick="reloadPreviewIframe()" title="Tải lại khung xem trước" class="w-8 h-8 rounded-xl border border-slate-200 hover:bg-slate-50 flex items-center justify-center text-slate-500 hover:text-slate-800 transition">
+                        <i class="fa-solid fa-rotate-right text-xs"></i>
+                    </button>
+                    <a href="./index.html" target="_blank" title="Mở trang trong tab mới" class="w-8 h-8 rounded-xl border border-slate-200 hover:bg-slate-50 flex items-center justify-center text-slate-500 hover:text-slate-800 transition">
+                        <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Iframe Container -->
+            <div class="flex-1 p-3 md:p-5 overflow-hidden flex items-center justify-center bg-slate-200/60">
+                <div id="previewDeviceWrapper" class="relative overflow-hidden flex items-center justify-center transition-all duration-300">
+                    <div id="previewDeviceFrame" class="device-preview-wrapper bg-white overflow-hidden relative shadow-2xl">
+                        <iframe id="previewIframe" src="./index.html" class="w-full h-full border-none bg-[#FDE8ED]" title="Live Website Preview"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toastNotification" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none toast-slide">
+        <div class="bg-slate-900 text-white px-5 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700/50 backdrop-blur-md">
+            <div class="w-7 h-7 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-sm font-bold">
+                <i class="fa-solid fa-check"></i>
+            </div>
+            <div>
+                <div class="text-xs font-bold text-white">Changes Saved Successfully! ✨</div>
+                <div class="text-[11px] text-slate-400">Đã lưu và xuất dữ liệu JSON State ra console</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CENTRAL DATABASE & STUDIO CONTROLLER LOGIC -->
+    <script src="./iry_data.js?v=2"></script>
+    <script>
+        // =========================================================================
+        // GLOBAL JSON STATE (Matching the form fields & Database schema)
+        // =========================================================================
+        let studioState = {};
+
+        // 1. Initialize State from iry_data.js / LocalStorage
+        function initStudioState() {
+            try {
+                const cached = localStorage.getItem('IRY_CMS_CACHE');
+                if (cached) {
+                    studioState = JSON.parse(cached);
+                    // Dọn dẹp cache cũ: Xóa bỏ các link ảnh CDN flaticon để trả về icon nguyên thủy
+                    if (studioState.social_links && Array.isArray(studioState.social_links)) {
+                        studioState.social_links.forEach(s => {
+                            if (s.icon && s.icon.includes('flaticon.com')) {
+                                s.icon = '';
+                            }
+                        });
+                        localStorage.setItem('IRY_CMS_CACHE', JSON.stringify(studioState));
+                    }
+                } else if (window.IRY_DEFAULT_DATABASE) {
+                    studioState = JSON.parse(JSON.stringify(IRY_DEFAULT_DATABASE));
+                }
+            } catch (e) {
+                console.warn('[Studio] Failed reading cache, using defaults:', e);
+                studioState = JSON.parse(JSON.stringify(IRY_DEFAULT_DATABASE || {}));
+            }
+
+            populateFormFields();
+            renderGamesList();
+        }
+
+        // 2. Populate form input values from JSON state
+        function populateFormFields() {
+            // Section 1: General Info
+            document.getElementById('inputAvatarUrl').value = getDeepValue('profile.avatar') || '';
+            document.getElementById('inputNickname').value = getDeepValue('profile.name') || '';
+            document.getElementById('inputQuote').value = getDeepValue('profile.quote') || '';
+            renderSocialsList();
+
+            // Section 2: Our Story
+            document.getElementById('inputStoryTitle').value = getDeepValue('chapters.chapter1.title') || '';
+            document.getElementById('inputStoryContent').value = getDeepValue('chapters.chapter1.desc') || '';
+            document.getElementById('inputPrologueQuote').value = getDeepValue('chapters.prologue.quote') || '';
+
+            // Section 3: Play With Me
+            const inputGameSectionTitle = document.getElementById('inputGameSectionTitle');
+            if(inputGameSectionTitle) inputGameSectionTitle.value = getDeepValue('chapters.chapter2.title') || '';
+            const inputGameSectionDesc = document.getElementById('inputGameSectionDesc');
+            if(inputGameSectionDesc) inputGameSectionDesc.value = getDeepValue('chapters.chapter2.desc') || '';
+
+            // Section 4: Melodies
+            document.getElementById('inputMusicTitle').value = getDeepValue('chapters.chapter3.title') || '';
+            document.getElementById('inputMusicDesc').value = getDeepValue('chapters.chapter3.desc') || '';
+            const firstMusic = (studioState.music && studioState.music[0]) ? studioState.music[0].youtube_embed : '';
+            document.getElementById('inputMusicEmbed').value = firstMusic;
+
+            // Section 5: Donate & Sweet Note
+            const inputSweetLetter = document.getElementById('inputSweetLetter');
+            if (inputSweetLetter) inputSweetLetter.value = getDeepValue('chapters.chapter4.letter') || '';
+            document.getElementById('inputSweetNote').value = getDeepValue('chapters.chapter4.desc') || '';
+            
+            const qrImage = getDeepValue('donate.qr_image');
+            updateQrPreview(qrImage || '');
+            
+            document.getElementById('inputQrData').value = getDeepValue('donate.qr_data') || '';
+            document.getElementById('inputBankName').value = getDeepValue('donate.bank_name') || '';
+            document.getElementById('inputBankOwner').value = getDeepValue('donate.bank_owner') || '';
+            document.getElementById('inputBankAccount').value = getDeepValue('donate.bank_account') || '';
+        }
+
+        // 2b. Render Dynamic Socials List
+        function renderSocialsList() {
+            const container = document.getElementById('socialsListContainer');
+            if (!container) return;
+
+            // Migrate from object to array if needed
+            if (!Array.isArray(studioState.social_links)) {
+                studioState.social_links = [];
+                if (studioState.socials && typeof studioState.socials === 'object') {
+                    for (const [k, v] of Object.entries(studioState.socials)) {
+                        studioState.social_links.push({ name: k, url: v, icon: '' });
+                    }
+                }
+            }
+
+            const socials = studioState.social_links;
+            
+            if (socials.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-4 text-xs text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        Chưa có link mạng xã hội nào.
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = socials.map((item, idx) => `
+                <div class="flex items-center gap-3 relative group bg-white p-2 border border-slate-200 rounded-xl">
+                    <!-- Icon Upload (Left) -->
+                    <div class="relative w-12 h-12 flex-shrink-0 bg-slate-100 rounded-lg overflow-hidden border border-slate-200 flex items-center justify-center cursor-pointer hover:border-brand-400 transition group/icon" onclick="document.getElementById('socialIconUpload_${idx}').click()" title="Click để đổi icon">
+                        ${item.icon 
+                            ? `<img src="${item.icon}" class="w-full h-full object-cover">` 
+                            : `<i class="fa-solid fa-image text-slate-400 text-lg"></i>`
+                        }
+                        <div class="absolute inset-0 bg-black/40 flex flex-col items-center justify-center opacity-0 group-hover/icon:opacity-100 transition">
+                            <i class="fa-solid fa-camera text-white text-xs"></i>
+                        </div>
+                        <input type="file" id="socialIconUpload_${idx}" accept="image/*" class="hidden" onchange="handleSocialIconUpload(${idx}, event)">
+                    </div>
+                    
+                    <!-- Inputs (Right) -->
+                    <div class="flex-1 flex flex-col gap-2">
+                        <input type="text" value="${escapeHtml(item.name || '')}" oninput="updateSocialProperty(${idx}, 'name', this.value)" placeholder="Tên (vd: TikTok)" class="w-full px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs font-bold text-slate-800 focus:outline-none focus:ring-2 focus:ring-brand-400 transition uppercase">
+                        <input type="text" value="${escapeHtml(item.url || '')}" oninput="updateSocialProperty(${idx}, 'url', this.value)" placeholder="https://link..." class="w-full px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-600 focus:outline-none focus:ring-2 focus:ring-brand-400 transition">
+                    </div>
+
+                    <!-- Delete Button -->
+                    <button onclick="removeSocialItem(${idx})" class="text-slate-400 hover:text-rose-500 p-2 rounded-lg hover:bg-rose-50 transition" title="Xóa">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function updateSocialProperty(idx, prop, val) {
+            studioState.social_links[idx][prop] = val;
+            broadcastStateToPreview();
+        }
+
+        function handleSocialIconUpload(idx, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                studioState.social_links[idx].icon = e.target.result;
+                renderSocialsList();
+                broadcastStateToPreview();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function removeSocialItem(idx) {
+            studioState.social_links.splice(idx, 1);
+            renderSocialsList();
+            broadcastStateToPreview();
+        }
+
+        function addNewSocialItem() {
+            if (!Array.isArray(studioState.social_links)) studioState.social_links = [];
+            studioState.social_links.push({ name: '', url: '', icon: '' });
+            renderSocialsList();
+            broadcastStateToPreview();
+        }
+
+        function addPresetSocial(name, url, iconUrl = '') {
+            if (!Array.isArray(studioState.social_links)) studioState.social_links = [];
+            studioState.social_links.push({ name: name, url: url, icon: iconUrl });
+            renderSocialsList();
+            broadcastStateToPreview();
+        }
+
+        function handleGameIconUpload(idx, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            event.target.value = '';
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    const MAX_SIZE = 256;
+                    if (width > height) {
+                        if (width > MAX_SIZE) {
+                            height *= MAX_SIZE / width;
+                            width = MAX_SIZE;
+                        }
+                    } else {
+                        if (height > MAX_SIZE) {
+                            width *= MAX_SIZE / height;
+                            height = MAX_SIZE;
+                        }
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    const compressedBase64 = canvas.toDataURL('image/png');
+                    
+                    studioState.games[idx].custom_icon = compressedBase64;
+                    renderGamesList();
+                    broadcastStateToPreview();
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function handleMainAvatarUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            // Xóa giá trị input file để có thể chọn lại cùng 1 file
+            event.target.value = '';
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    let width = img.width;
+                    let height = img.height;
+                    
+                    // Resize to max 800x800 for avatar
+                    const MAX_SIZE = 800;
+                    if (width > height) {
+                        if (width > MAX_SIZE) {
+                            height *= MAX_SIZE / width;
+                            width = MAX_SIZE;
+                        }
+                    } else {
+                        if (height > MAX_SIZE) {
+                            width *= MAX_SIZE / height;
+                            height = MAX_SIZE;
+                        }
+                    }
+                    
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+                    
+                    // Nén ảnh JPEG chất lượng 0.8
+                    const compressedBase64 = canvas.toDataURL('image/jpeg', 0.8);
+                    
+                    // Xóa mẫu cũ và ghi đè
+                    updateField('profile.avatar', compressedBase64);
+                    document.getElementById('inputAvatarUrl').value = compressedBase64;
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 3. Render Dynamic Games List with Add & Remove handlers
+        function renderGamesList() {
+            const container = document.getElementById('gamesListContainer');
+            if (!container) return;
+
+            const games = studioState.games || [];
+            if (games.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-4 text-xs text-slate-400 bg-slate-50 rounded-xl border border-dashed border-slate-200">
+                        Chưa có game nào trong danh sách. Bấm nút dưới để thêm!
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = games.map((g, idx) => {
+                // Migrate to new structure if old structure is found
+                if (!g.videos) {
+                    g.videos = [];
+                    if (g.youtube_embed) {
+                        g.videos.push({
+                            title: g.title || '',
+                            desc: g.desc || '',
+                            youtube_embed: g.youtube_embed
+                        });
+                        delete g.youtube_embed;
+                        delete g.title;
+                        delete g.desc;
+                    }
+                }
+
+                const videosHtml = g.videos.map((v, vIdx) => `
+                    <div class="mt-2 p-3 bg-white border border-slate-200 rounded-lg shadow-sm relative">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-[10px] font-bold text-slate-500">Video ${vIdx + 1}</span>
+                            <button onclick="removeVideoFromGame(${idx}, ${vIdx})" type="button" class="text-slate-400 hover:text-rose-500 text-xs px-2 py-1 rounded-lg hover:bg-rose-50 transition" title="Xóa video này">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                        <div class="space-y-2">
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-600 mb-1">Tiêu Đề Video</label>
+                                <input type="text" value="${escapeHtml(v.title || '')}" oninput="updateGameVideoProperty(${idx}, ${vIdx}, 'title', this.value)" placeholder="Roblox Chill Moments" class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-brand-400 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-600 mb-1">Mô Tả Ngắn</label>
+                                <input type="text" value="${escapeHtml(v.desc || '')}" oninput="updateGameVideoProperty(${idx}, ${vIdx}, 'desc', this.value)" placeholder="Mô tả buổi livestream..." class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-brand-400 focus:outline-none transition">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-slate-600 mb-1">YouTube URL</label>
+                                <input type="text" value="${escapeHtml(v.youtube_embed || '')}" oninput="updateGameVideoProperty(${idx}, ${vIdx}, 'youtube_embed', this.value)" placeholder="https://youtube.com/embed/..." class="w-full px-2.5 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-brand-400 focus:outline-none transition">
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+
+                return `
+                <div id="gameCardItem_${idx}" class="p-3.5 bg-slate-50 border border-slate-200 rounded-xl space-y-2.5 relative group hover:border-brand-300 transition">
+                    <div class="flex items-center justify-between">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase flex items-center gap-1.5">
+                            <span class="w-5 h-5 rounded-md bg-brand-100 text-brand-600 flex items-center justify-center text-[10px] font-bold">${idx + 1}</span>
+                            Thư Mục: ${escapeHtml(g.name || 'Game ' + (idx + 1))}
+                        </span>
+                        <button onclick="removeGameItem(${idx})" type="button" class="text-slate-400 hover:text-rose-500 text-xs px-2 py-1 rounded-lg hover:bg-rose-50 transition" title="Xóa thư mục game này">
+                            <i class="fa-solid fa-trash-can mr-1"></i> Xóa
+                        </button>
+                    </div>
+
+                    <div class="flex items-center gap-3">
+                        <!-- Icon Upload for Game -->
+                        <div class="relative w-14 h-14 flex-shrink-0 bg-white rounded-lg overflow-hidden border border-slate-200 flex items-center justify-center cursor-pointer hover:border-brand-400 transition shadow-sm group/icon" onclick="document.getElementById('gameIconUpload_${idx}').click()" title="Click để tải lên icon (PNG)">
+                            ${g.custom_icon 
+                                ? `<img src="${g.custom_icon}" class="w-full h-full object-contain p-1">` 
+                                : `<i class="fa-solid ${g.badge_icon || 'fa-folder-open'} text-slate-400 text-xl"></i>`
+                            }
+                            <div class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center opacity-0 group-hover/icon:opacity-100 transition">
+                                <i class="fa-solid fa-camera text-white text-[10px]"></i>
+                            </div>
+                            <input type="file" id="gameIconUpload_${idx}" accept="image/png, image/jpeg, image/webp" class="hidden" onchange="handleGameIconUpload(${idx}, event)">
+                        </div>
+                        
+                        <div class="flex-grow">
+                            <label class="block text-[10px] font-bold text-slate-600 mb-1">Tên Phân Vùng Game (VD: Wuthering Waves)</label>
+                            <input type="text" id="inputGameName_${idx}" value="${escapeHtml(g.name || '')}" oninput="updateGameProperty(${idx}, 'name', this.value)" placeholder="Wuthering Waves" class="w-full px-2.5 py-1.5 bg-white border border-slate-200 rounded-lg text-xs focus:ring-2 focus:ring-brand-400 focus:outline-none transition">
+                        </div>
+                    </div>
+
+                    <div class="mt-4 pt-3 border-t border-slate-200">
+                        <label class="block text-[11px] font-bold text-slate-700 mb-2 uppercase tracking-wide">Danh Sách Video Trong Game Này</label>
+                        
+                        <div class="space-y-2 mb-3">
+                            ${videosHtml}
+                        </div>
+
+                        <button onclick="addVideoToGame(${idx})" type="button" class="w-full py-1.5 rounded-lg border border-brand-200 text-brand-600 bg-white hover:bg-brand-50 text-xs font-bold transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-plus"></i> Thêm Video Vào Game
+                        </button>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function addNewGameItem() {
+            if (!studioState.games) studioState.games = [];
+            studioState.games.push({
+                id: 'game-' + Date.now(),
+                name: 'Tựa Game Mới',
+                badge_icon: 'fa-gamepad',
+                videos: [
+                    {
+                        title: 'Gameplay Highlights 1',
+                        desc: 'Khoảnh khắc đáng nhớ...',
+                        youtube_embed: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1'
+                    }
+                ]
+            });
+            renderGamesList();
+            broadcastStateToPreview();
+        }
+
+        function removeGameItem(index) {
+            if (!studioState.games) return;
+            studioState.games.splice(index, 1);
+            renderGamesList();
+            broadcastStateToPreview();
+        }
+
+        function updateGameProperty(index, prop, value) {
+            if (studioState.games && studioState.games[index]) {
+                studioState.games[index][prop] = value;
+                broadcastStateToPreview();
+            }
+        }
+
+        function addVideoToGame(gameIdx) {
+            if (!studioState.games[gameIdx].videos) studioState.games[gameIdx].videos = [];
+            studioState.games[gameIdx].videos.push({ title: 'Video Mới', desc: '', youtube_embed: '' });
+            renderGamesList();
+            broadcastStateToPreview();
+        }
+
+        function removeVideoFromGame(gameIdx, vIdx) {
+            studioState.games[gameIdx].videos.splice(vIdx, 1);
+            renderGamesList();
+            broadcastStateToPreview();
+        }
+
+        function updateGameVideoProperty(gameIdx, vIdx, key, value) {
+            studioState.games[gameIdx].videos[vIdx][key] = value;
+            broadcastStateToPreview();
+        }
+
+        function updateFeaturedMusicEmbed(value) {
+            if (!studioState.music) studioState.music = [];
+            if (!studioState.music[0]) {
+                studioState.music.push({ title: 'Featured Lo-Fi', subtitle: 'Chillhop Beats', youtube_embed: value, icon: 'compact-disc' });
+            } else {
+                studioState.music[0].youtube_embed = value;
+            }
+            broadcastStateToPreview();
+        }
+
+        // ================= QR UPLOAD =================
+        function handleQrUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    const canvas = document.createElement('canvas');
+                    const MAX_SIZE = 512;
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height && width > MAX_SIZE) {
+                        height *= MAX_SIZE / width;
+                        width = MAX_SIZE;
+                    } else if (height > MAX_SIZE) {
+                        width *= MAX_SIZE / height;
+                        height = MAX_SIZE;
+                    }
+
+                    canvas.width = width;
+                    canvas.height = height;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    const compressedBase64 = canvas.toDataURL('image/webp', 0.85);
+                    
+                    updateField('donate.qr_image', compressedBase64);
+                    updateQrPreview(compressedBase64);
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        function updateQrPreview(url) {
+            const preview = document.getElementById('previewQrImage');
+            const placeholder = document.getElementById('placeholderQrImage');
+            if (!preview || !placeholder) return;
+            if (url) {
+                preview.src = url;
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            } else {
+                preview.src = '';
+                preview.classList.add('hidden');
+                placeholder.classList.remove('hidden');
+            }
+        }
+        // =============================================
+
+        // 4. Update Field in Deep Object
+        function updateField(path, value) {
+            setDeepValue(path, value);
+            broadcastStateToPreview();
+        }
+
+        function getDeepValue(path) {
+            const keys = path.split('.');
+            let curr = studioState;
+            for (const k of keys) {
+                if (curr && typeof curr === 'object' && k in curr) {
+                    curr = curr[k];
+                } else {
+                    return null;
+                }
+            }
+            return curr;
+        }
+
+        function setDeepValue(path, value) {
+            const keys = path.split('.');
+            let curr = studioState;
+            for (let i = 0; i < keys.length - 1; i++) {
+                const k = keys[i];
+                if (!curr[k] || typeof curr[k] !== 'object') curr[k] = {};
+                curr = curr[k];
+            }
+            curr[keys[keys.length - 1]] = value;
+        }
+
+        // 5. Broadcast State to Live Preview iframe
+        function broadcastStateToPreview() {
+            try {
+                // Trigger live update inside iframe FIRST
+                const iframe = document.getElementById('previewIframe');
+                if (iframe && iframe.contentWindow) {
+                    if (iframe.contentWindow.IRY_CMS) {
+                        iframe.contentWindow.IRY_CMS.mergeData(studioState);
+                        iframe.contentWindow.IRY_CMS.applyToDOM();
+                    }
+                }
+            } catch (e) {
+                // Ignore cross-origin preview notices
+            }
+
+            try {
+                // Then try to save to localStorage so it persists on reload
+                localStorage.setItem('IRY_CMS_CACHE', JSON.stringify(studioState));
+            } catch (e) {
+                console.warn('[Studio] Failed to save to localStorage (QuotaExceeded?):', e);
+                alert("Lỗi: File ảnh quá lớn hoặc LocalStorage bị đầy, không thể lưu bộ nhớ đệm!");
+            }
+        }
+
+        // 6. Save All Changes & Toast Notification
+        function saveAllChanges() {
+            // Save state to LocalStorage
+            try {
+                localStorage.setItem('IRY_CMS_CACHE', JSON.stringify(studioState));
+            } catch(e) {
+                alert("Lỗi: Không thể lưu, bộ nhớ đệm đã bị đầy do ảnh quá nặng!");
+                return;
+            }
+
+            // Log JSON state for Firebase / Backend API integration
+            console.log('====================================');
+            console.log('IRY CMS STATE SAVED SUCCESSFULLY:');
+            console.log(JSON.stringify(studioState, null, 2));
+            console.log('====================================');
+
+            // Trigger preview refresh
+            broadcastStateToPreview();
+
+            // Show Toast Notification
+            showToast();
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toastNotification');
+            if (toast) {
+                toast.classList.add('show');
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        function exportJsonConfig() {
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(studioState, null, 2));
+            const downloadAnchor = document.createElement('a');
+            downloadAnchor.setAttribute("href", dataStr);
+            downloadAnchor.setAttribute("download", "iry_cms_config.json");
+            document.body.appendChild(downloadAnchor);
+            downloadAnchor.click();
+            downloadAnchor.remove();
+        }
+
+        function resetToDefaults() {
+            localStorage.removeItem('IRY_CMS_CACHE');
+            studioState = JSON.parse(JSON.stringify(IRY_DEFAULT_DATABASE || {}));
+            populateFormFields();
+            renderGamesList();
+            broadcastStateToPreview();
+            showToast();
+            reloadPreviewIframe();
+        }
+
+        // 7. Accordion Interactions
+        function toggleAccordion(btn) {
+            const item = btn.closest('.accordion-item');
+            const isOpen = item.classList.contains('open');
+
+            if (isOpen) {
+                item.classList.remove('open');
+            } else {
+                item.classList.add('open');
+            }
+        }
+
+        // 8. Device Viewport Toggles (Desktop 1440p Scaled / Tablet / Mobile)
+        let currentViewportMode = 'desktop';
+
+        function setDeviceViewport(mode) {
+            currentViewportMode = mode;
+            const btnD = document.getElementById('btnViewDesktop');
+            const btnT = document.getElementById('btnViewTablet');
+            const btnM = document.getElementById('btnViewMobile');
+
+            [btnD, btnT, btnM].forEach(b => {
+                b.classList.remove('bg-white', 'shadow-xs', 'text-slate-800');
+                b.classList.add('text-slate-500');
+            });
+
+            if (mode === 'desktop') {
+                btnD.classList.add('bg-white', 'shadow-xs', 'text-slate-800');
+                btnD.classList.remove('text-slate-500');
+            } else if (mode === 'tablet') {
+                btnT.classList.add('bg-white', 'shadow-xs', 'text-slate-800');
+                btnT.classList.remove('text-slate-500');
+            } else if (mode === 'mobile') {
+                btnM.classList.add('bg-white', 'shadow-xs', 'text-slate-800');
+                btnM.classList.remove('text-slate-500');
+            }
+
+            updatePreviewScaling();
+        }
+
+        function updatePreviewScaling() {
+            const wrapper = document.getElementById('previewDeviceWrapper');
+            const frame = document.getElementById('previewDeviceFrame');
+            const container = wrapper ? wrapper.parentElement : null;
+            const resText = document.getElementById('previewResolutionText');
+            if (!wrapper || !frame || !container) return;
+
+            if (currentViewportMode === 'desktop') {
+                const availableW = container.clientWidth - 40;
+                const availableH = container.clientHeight - 40;
+                const targetW = 1440;
+                const targetH = 900;
+                const scale = Math.min(availableW / targetW, availableH / targetH);
+
+                const scaledW = targetW * scale;
+                const scaledH = targetH * scale;
+
+                wrapper.style.width = `${scaledW}px`;
+                wrapper.style.height = `${scaledH}px`;
+                wrapper.style.borderRadius = '20px';
+                wrapper.style.boxShadow = '0 25px 60px rgba(0,0,0,0.18)';
+                wrapper.style.border = '4px solid rgba(15, 23, 42, 0.12)';
+                wrapper.style.position = 'relative';
+
+                frame.style.position = 'absolute';
+                frame.style.top = '0';
+                frame.style.left = '0';
+                frame.style.width = `${targetW}px`;
+                frame.style.height = `${targetH}px`;
+                frame.style.maxWidth = 'none';
+                frame.style.maxHeight = 'none';
+                frame.style.transform = `scale(${scale})`;
+                frame.style.transformOrigin = '0 0';
+                frame.style.borderRadius = '0';
+                frame.style.border = 'none';
+
+                if (resText) resText.textContent = `Desktop 1440p (${Math.round(scale * 100)}%)`;
+            } else if (currentViewportMode === 'tablet') {
+                wrapper.style.width = '768px';
+                wrapper.style.height = '100%';
+                wrapper.style.borderRadius = '1.5rem';
+                wrapper.style.boxShadow = '0 20px 50px rgba(0,0,0,0.15)';
+                wrapper.style.border = '4px solid rgba(15, 23, 42, 0.12)';
+                wrapper.style.position = 'relative';
+
+                frame.style.position = 'relative';
+                frame.style.top = 'auto';
+                frame.style.left = 'auto';
+                frame.style.width = '100%';
+                frame.style.height = '100%';
+                frame.style.transform = 'none';
+                frame.style.borderRadius = '1.5rem';
+                if (resText) resText.textContent = 'Tablet 768px';
+            } else if (currentViewportMode === 'mobile') {
+                wrapper.style.width = '390px';
+                wrapper.style.height = '100%';
+                wrapper.style.borderRadius = '2.5rem';
+                wrapper.style.boxShadow = '0 20px 50px rgba(0,0,0,0.15)';
+                wrapper.style.border = '4px solid rgba(15, 23, 42, 0.12)';
+                wrapper.style.position = 'relative';
+
+                frame.style.position = 'relative';
+                frame.style.top = 'auto';
+                frame.style.left = 'auto';
+                frame.style.width = '100%';
+                frame.style.height = '100%';
+                frame.style.transform = 'none';
+                frame.style.borderRadius = '2.5rem';
+                if (resText) resText.textContent = 'Mobile 390px';
+            }
+        }
+
+        window.addEventListener('resize', () => {
+            if (currentViewportMode === 'desktop') {
+                updatePreviewScaling();
+            }
+        });
+
+        function reloadPreviewIframe() {
+            const iframe = document.getElementById('previewIframe');
+            if (iframe) {
+                const currentSrc = iframe.src.split('?')[0];
+                iframe.src = currentSrc + '?v=' + Date.now();
+            }
+        }
+
+        // 9. Mobile Tabs (Switch between Edit and Preview)
+        function switchMobileTab(tab) {
+            const left = document.getElementById('leftControlPanel');
+            const right = document.getElementById('rightPreviewPanel');
+            const btnE = document.getElementById('mobileTabEdit');
+            const btnP = document.getElementById('mobileTabPreview');
+
+            if (tab === 'edit') {
+                left.classList.remove('hidden');
+                right.classList.add('hidden');
+                btnE.classList.add('bg-white', 'shadow-sm', 'text-brand-600');
+                btnE.classList.remove('text-slate-500');
+                btnP.classList.remove('bg-white', 'shadow-sm', 'text-brand-600');
+                btnP.classList.add('text-slate-500');
+            } else {
+                left.classList.add('hidden');
+                right.classList.remove('hidden');
+                btnP.classList.add('bg-white', 'shadow-sm', 'text-brand-600');
+                btnP.classList.remove('text-slate-500');
+                btnE.classList.remove('bg-white', 'shadow-sm', 'text-brand-600');
+                btnE.classList.add('text-slate-500');
+            }
+        }
+
+        // =========================================================================
+        // 10. VISUAL CLICK-TO-EDIT HANDLER (postMessage API from iframe)
+        // =========================================================================
+        window.addEventListener('message', (event) => {
+            if (!event.data || event.data.type !== 'FOCUS_INPUT') return;
+            const targetId = event.data.targetId;
+            if (!targetId) return;
+
+            // If on Mobile view, automatically switch to Edit tab
+            if (window.innerWidth < 1024) {
+                switchMobileTab('edit');
+            }
+
+            const inputEl = document.getElementById(targetId);
+            if (!inputEl) {
+                console.warn('[Studio] Target input field not found:', targetId);
+                return;
+            }
+
+            // Step 1: Find parent accordion and open it
+            const accordionItem = inputEl.closest('.accordion-item');
+            if (accordionItem) {
+                accordionItem.classList.add('open');
+            }
+
+            // Step 2: Smooth scroll the left control panel to that field
+            setTimeout(() => {
+                inputEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+                // Step 3: Trigger temporary CSS pulsing glow highlight effect
+                inputEl.classList.remove('field-focus-highlight');
+                void inputEl.offsetWidth; // Force reflow
+                inputEl.classList.add('field-focus-highlight');
+
+                // Step 4: Focus input so user can type immediately
+                if (typeof inputEl.focus === 'function') {
+                    inputEl.focus();
+                    if (typeof inputEl.select === 'function' && inputEl.value) {
+                        // Optionally place cursor at end or select
+                    }
+                }
+
+                // Remove highlight class after animation finishes
+                setTimeout(() => {
+                    inputEl.classList.remove('field-focus-highlight');
+                }, 1600);
+            }, 120);
+        });
+
+        function escapeHtml(str) {
+            if (typeof str !== 'string') return '';
+            return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+        }
+
+        // Initial Load
+        document.addEventListener('DOMContentLoaded', () => {
+            initStudioState();
+            setTimeout(updatePreviewScaling, 100);
+        });
+    </script>
+</body>
+</html>

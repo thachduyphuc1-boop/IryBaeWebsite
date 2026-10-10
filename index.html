@@ -1,0 +1,2067 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iry Profile Cute</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌸</text></svg>">
+    <!-- Google Fonts & Cute Aesthetic English Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@400;600;700&family=Gaegu:wght@400;700&family=Itim&family=Marck+Script&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for UI icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        @font-face {
+            font-family: 'Cheri';
+            src: url('../irybae-vercel/assets/fonts/CHERI___.TTF') format('truetype'), url('../item/cheri/CHERI___.TTF') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        :root {
+            /* Palette Pastel đơn sắc chuyển sắc theo từng phần */
+            --bg-prologue: #FDE8ED;
+            --bg-c1: #FCE1E8; 
+            --bg-c2: #F7CAD6; 
+            --bg-c3: #F2ADC0; 
+            --bg-c4: #E598AC; 
+            --bg-epilogue: #D98299; 
+            
+            --text-primary: #5C3243;
+            --text-secondary: #8B5D70;
+            --card-bg: rgba(255, 240, 244, 0.94);
+            --border-dashed: 2px dashed rgba(194, 118, 142, 0.55);
+            --shadow-soft: 0 12px 35px rgba(186, 117, 137, 0.18);
+            --shadow-pop: 0 20px 50px rgba(186, 117, 137, 0.35);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            cursor: none !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-prologue);
+            color: var(--text-primary);
+            font-family: 'Comfortaa', 'Quicksand', sans-serif;
+            transition: background-color 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+            overflow-x: hidden;
+            cursor: none !important;
+        }
+
+        /* Nền Artwork Khung Hoa Bướm Lá Góc Phủ Toàn Bộ Trang Web */
+        .bg-artwork-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('assets/image/bg_artwork.png');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.75;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Fixed Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.2rem 3.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 500;
+            background: rgba(253, 232, 237, 0.45);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .logo {
+            font-family: 'Cheri', cursive;
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 0.84rem;
+            opacity: 0.65;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            padding: 0.35rem 0.75rem;
+            border-radius: 14px;
+        }
+
+        .nav-menu a.active, .nav-menu a:hover {
+            opacity: 1;
+            background: rgba(255, 255, 255, 0.85);
+            color: #A34867;
+            transform: translateY(-2px);
+        }
+
+        /* Scroll Progress Bar */
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #E598AC, #C2768E, #8B5D70);
+            width: 0%;
+            z-index: 1000;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Custom Interactive Flower Cursor */
+        #customCursor {
+            position: fixed;
+            width: 32px;
+            height: 32px;
+            pointer-events: none;
+            z-index: 999999;
+            transform: translate(-50%, -50%);
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            filter: drop-shadow(0 2px 8px rgba(229, 152, 172, 0.9));
+            transition: transform 0.15s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.2s ease;
+            user-select: none;
+        }
+
+        #customCursor.hover-active {
+            transform: translate(-50%, -50%) scale(1.4) rotate(15deg);
+            filter: drop-shadow(0 0 10px #FF1493) drop-shadow(0 0 22px #FF69B4);
+        }
+
+        .trail-particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 99998;
+            font-size: 14px;
+            transform: translate(-50%, -50%);
+            animation: floatFade 0.9s forwards ease-out;
+        }
+
+        @keyframes floatFade {
+            0% { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+            100% { opacity: 0; transform: translate(-50%, -100%) scale(0.3) rotate(35deg); }
+        }
+
+        /* ================= SCROLL-DRIVEN STICKY AVATAR MASCOT (VỚI HIỆU ỨNG HOVER LẬT QR DONATE) ================= */
+        .avatar-mascot-container {
+            position: fixed;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 320px;
+            height: 320px;
+            z-index: 50;
+            pointer-events: auto; /* Bật chuột để hover lật QR */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px; /* Hỗ trợ hiệu ứng 3D lật thẻ */
+            transition: top 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        left 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        width 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        height 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        transform 0.75s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .chapter-avatar-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid rgba(229, 152, 172, 0.7);
+            box-shadow: 0 25px 55px rgba(186, 117, 137, 0.4);
+            background: #FDE8ED;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        box-shadow 0.4s ease,
+                        border-color 0.4s ease;
+        }
+
+        .chapter-avatar-wrapper:hover {
+            transform: scale(1.05);
+            box-shadow: 0 30px 65px rgba(186, 117, 137, 0.55);
+            border-color: rgba(194, 118, 142, 0.9);
+        }
+
+        /* Mặt trước: Ảnh avatar */
+        .chapter-avatar-front {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+        .chapter-avatar-front img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+
+        /* Mặt sau: QR code */
+        .chapter-avatar-back {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 240, 244, 0.97);
+            opacity: 0;
+            transform: scale(0.92);
+            pointer-events: none;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .chapter-avatar-frame:hover .chapter-avatar-front { opacity: 0; }
+        .chapter-avatar-frame:hover .chapter-avatar-back {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        /* Chapter avatar shape variations */
+        #chapter1 .chapter-avatar-wrapper { border-radius: 48px; }
+        #chapter2 .chapter-avatar-wrapper { border-radius: 36px; }
+        #chapter3 .chapter-avatar-wrapper { border-radius: 48px; }
+        #chapter4 .chapter-avatar-wrapper { border-radius: 56px; }
+
+        .avatar-mascot-wrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 6px solid rgba(229, 152, 172, 0.7); /* Viền hồng nhẹ thay vì trắng để tránh lộ */
+            box-shadow: 0 25px 55px rgba(186, 117, 137, 0.4);
+            background: #FDE8ED; /* Nền hồng nhạt thay vì trắng để góc không bị lộ khi transition */
+            overflow: hidden; /* Cắt gọn ảnh theo border-radius - fix viền trắng lộ */
+            transition: border-radius 0.75s cubic-bezier(0.2, 0.8, 0.2, 1),
+                        border 0.75s ease,
+                        box-shadow 0.75s ease,
+                        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+
+        /* Khi di chuột vào Avatar ở Chapter 0..4: hiện QR code mượt mà */
+        body:not(.state-epilogue) .avatar-mascot-container:hover .avatar-mascot-wrapper {
+            transform: scale(1.05);
+            box-shadow: 0 30px 65px rgba(186, 117, 137, 0.55);
+            border-color: rgba(194, 118, 142, 0.9);
+        }
+
+        /* Khi hover vào Avatar: Mặt trước mờ đi */
+        body:not(.state-epilogue) .avatar-mascot-container:hover .mascot-front-face {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Khi hover vào Avatar: Mặt sau hiện mã QR nổi lên sắc nét */
+        body:not(.state-epilogue) .avatar-mascot-container:hover .mascot-back-face {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+
+        /* Mặt trước: Ảnh Avatar Duck Chibi */
+        .mascot-front-face {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0; /* Bỏ border-radius ở đây vì wrapper đã có overflow:hidden */
+            z-index: 2;
+            opacity: 1;
+            transition: opacity 0.4s ease;
+        }
+
+        .mascot-front-face img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* Mặt sau: Mã QR Donate (Mặc định ẩn, hover vào hiện lên) */
+        .mascot-back-face {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 0; /* Bỏ border-radius ở đây vì wrapper đã có overflow:hidden */
+            background: linear-gradient(135deg, #FFF0F4 0%, #FDE8ED 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1.2rem;
+            text-align: center;
+            z-index: 3;
+            opacity: 0;
+            transform: scale(0.92);
+            pointer-events: none;
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .mascot-qr-frame {
+            background: #FFF;
+            padding: 8px;
+            border-radius: 18px;
+            box-shadow: 0 8px 20px rgba(186, 117, 137, 0.25);
+            border: 2px dashed rgba(194, 118, 142, 0.5);
+            margin-bottom: 6px;
+        }
+
+        .mascot-qr-frame img {
+            width: 135px;
+            height: 135px;
+            border-radius: 12px;
+            display: block;
+        }
+
+        .qr-donor-title {
+            font-family: 'Cheri', cursive;
+            font-size: 1.15rem;
+            color: #8C2C4E;
+            margin-bottom: 2px;
+        }
+
+        .qr-donor-subtitle {
+            font-size: 0.78rem;
+            color: #8B5D70;
+            font-weight: 700;
+        }
+
+        /* Lớp nội dung Lời Chúc ẩn hoàn toàn bên trong Mascot khi ở Chapter 0..4 */
+        .mascot-inner-blessing {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 2.2rem 3rem;
+            display: none; /* Ẩn vật lý hoàn toàn khi không ở Epilogue */
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: rgba(255, 240, 244, 0.96);
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.88);
+            z-index: 10;
+        }
+
+        /* ================= VỊ TRÍ MASCOT TẠI 6 PHẦN (SIZE LỚN RÕ NÉT NGUYÊN BẢN) ================= */
+        
+        /* ================= VỊ TRÍ MASCOT TẠI 6 PHẦN (SIZE LỚN RÕ NÉT NGUYÊN BẢN) ================= */
+        
+        /* 0. PROLOGUE: Avatar to tròn 290px nổi bật chính giữa trên */
+        body.state-prologue .avatar-mascot-container {
+            top: 29%;
+            left: 50%;
+            width: 290px;
+            height: 290px;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        body.state-prologue .avatar-mascot-wrapper {
+            border-radius: 50%;
+            border-color: rgba(229, 152, 172, 0.7);
+        }
+
+        /* 1. CHAPTER 01: Nằm BÊN TRÁI. Dùng calc để luôn giữ khoảng cách cố định với tâm (không bị văng ở màn 4K) */
+        body.state-c1 .avatar-mascot-container {
+            top: 50%;
+            left: calc(50% - 320px);
+            width: 310px;
+            height: 310px;
+            transform: translate(-50%, -50%) scale(1);
+        }
+        body.state-c1 .avatar-mascot-wrapper {
+            border-radius: 48px;
+            border-color: rgba(247, 202, 214, 0.85);
+        }
+
+        /* 2. CHAPTER 02: Nằm BÊN PHẢI */
+        body.state-c2 .avatar-mascot-container {
+            top: 50%;
+            left: calc(50% + 320px);
+            width: 310px;
+            height: 310px;
+            transform: translate(-50%, -50%) scale(1) rotate(5deg);
+        }
+        body.state-c2 .avatar-mascot-wrapper {
+            border-radius: 36px;
+            border-color: rgba(229, 152, 172, 0.85);
+        }
+
+        /* 3. CHAPTER 03: Nằm BÊN TRÁI */
+        body.state-c3 .avatar-mascot-container {
+            top: 50%;
+            left: calc(50% - 320px);
+            width: 310px;
+            height: 310px;
+            transform: translate(-50%, -50%) scale(1) rotate(-5deg);
+        }
+        body.state-c3 .avatar-mascot-wrapper {
+            border-radius: 48px;
+            border-color: rgba(242, 173, 192, 0.85);
+        }
+
+        /* 4. CHAPTER 04: Nằm BÊN PHẢI */
+        body.state-c4 .avatar-mascot-container {
+            top: 50%;
+            left: calc(50% + 320px);
+            width: 310px;
+            height: 310px;
+            transform: translate(-50%, -50%) scale(1) rotate(4deg);
+        }
+        body.state-c4 .avatar-mascot-wrapper {
+            border-radius: 56px;
+            border-color: rgba(229, 152, 172, 0.7);
+        }
+
+        /* 5. EPILOGUE (Lời Kết): NHẬP VÀO GIỮA VÀ NỞ RỘNG THÀNH KHUNG LỜI CHÚC LỚN */
+        body.state-epilogue .avatar-mascot-container {
+            top: 50%;
+            left: 50%;
+            width: min(840px, 94vw);
+            height: 480px;
+            transform: translate(-50%, -50%) scale(1) rotate(0deg);
+            pointer-events: auto;
+        }
+
+        body.state-epilogue .avatar-mascot-wrapper {
+            border-radius: 44px;
+            border: 4px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 30px 70px rgba(186, 117, 137, 0.45);
+            overflow: hidden;
+            transform: none !important;
+        }
+
+        /* Ẩn 2 mặt 3D khi đã ở Epilogue */
+        body.state-epilogue .mascot-front-face,
+        body.state-epilogue .mascot-back-face {
+            display: none !important;
+        }
+
+        /* Hiện nội dung lời chúc khi đã nở rộng trọn vẹn */
+        body.state-epilogue .mascot-inner-blessing {
+            display: flex !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
+            transform: scale(1);
+            animation: fadeInBlessing 0.45s ease forwards;
+        }
+
+        @keyframes fadeInBlessing {
+            0% { opacity: 0; transform: scale(0.92); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        /* ================= SECTIONS LAYOUT ================= */
+        section {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 3.5rem 2rem;
+        }
+
+        .section-container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Bento Card Styling - Phóng to toát lên vẻ ấm cúng, sang trọng */
+        .bento-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: var(--border-dashed);
+            border-radius: 40px;
+            padding: 2.8rem 2.5rem;
+            box-shadow: var(--shadow-soft);
+            max-width: 620px;
+            width: 100%;
+            opacity: 0.95;
+            transform: translateY(12px);
+            transition: opacity 0.35s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .bento-card.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .chapter-badge {
+            display: inline-block;
+            background: rgba(229, 152, 172, 0.65);
+            color: #FFF;
+            padding: 0.4rem 1.1rem;
+            border-radius: 20px;
+            font-size: 0.88rem;
+            font-weight: 700;
+            margin-bottom: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .bento-title {
+            font-family: 'Cheri', cursive;
+            font-size: 2.7rem;
+            color: var(--text-primary);
+            line-height: 1.15;
+            margin-bottom: 0.9rem;
+        }
+
+        .bento-desc {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: var(--text-secondary);
+            margin-bottom: 1.3rem;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            white-space: pre-line;
+        }
+
+        /* ================= 0. PROLOGUE: KHÔNG KHUNG - PURE TEXT ================= */
+        #prologue {
+            min-height: 100vh;
+            padding: 2rem 2rem 4rem;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        #prologue .section-container {
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: auto;
+            padding-top: 380px;
+            padding-bottom: 2rem;
+            text-align: center;
+        }
+
+        .prologue-text-wrapper {
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 0.5rem 1rem;
+            text-shadow: 0 2px 10px rgba(255, 255, 255, 0.8);
+        }
+
+        .prologue-title {
+            font-family: 'Cheri', cursive;
+            font-size: 3.5rem;
+            color: var(--text-primary);
+            margin-bottom: 0.6rem;
+            letter-spacing: 1px;
+            text-shadow: 0 4px 15px rgba(229, 152, 172, 0.4);
+        }
+
+        .prologue-story-quote {
+            font-family: 'Itim', cursive;
+            font-size: 1.45rem;
+            color: #7A3F55;
+            line-height: 1.75;
+            margin-bottom: 1.6rem;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            white-space: pre-line;
+        }
+
+        .scroll-down-hint {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #A34867;
+            font-weight: 700;
+            animation: bounceUpDown 2s infinite ease-in-out;
+        }
+
+        @keyframes bounceUpDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(6px); }
+        }
+
+        /* ================= CÁC CHƯƠNG LƯỚT NÉ KHUNG ================= */
+        
+        /* 1. CHAPTER 01: OUR STORY (Right side) */
+        #chapter1 .section-container {
+            justify-content: flex-end;
+        }
+
+        /* 2. CHAPTER 02: PLAY WITH ME (Left side) */
+        #chapter2 .section-container {
+            justify-content: flex-start;
+        }
+
+        /* 3. CHAPTER 03: SOUND OF DREAMS (Right side) */
+        #chapter3 .section-container {
+            justify-content: flex-end;
+        }
+
+        /* 4. CHAPTER 04: SWEET NOTE (Left side) */
+        #chapter4 .section-container {
+            justify-content: flex-start;
+        }
+
+        /* 5. EPILOGUE: A WISH FOR YOU (Center) */
+        #epilogue .section-container {
+            min-height: 100vh;
+        }
+
+        .blessing-title {
+            font-family: 'Cheri', cursive;
+            font-size: 2.5rem;
+            color: #8C2C4E;
+            margin-bottom: 0.8rem;
+        }
+
+        .blessing-quote {
+            font-family: 'Itim', cursive;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+            line-height: 1.75;
+            margin-bottom: 1.5rem;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            white-space: pre-line;
+        }
+
+        /* Game Icons Grid */
+        .interactive-games-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.9rem;
+            margin-top: 0.8rem;
+        }
+
+        .game-trigger-box {
+            background: #F7CAD6;
+            border: 2px solid #FFF;
+            border-radius: 20px;
+            padding: 1rem 0.4rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            box-shadow: 0 6px 15px rgba(186, 117, 137, 0.2);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-trigger-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 50%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0.45), transparent);
+        }
+
+        .game-trigger-box:hover {
+            transform: translateY(-7px) scale(1.08) rotate(3deg);
+            background: #E598AC;
+            box-shadow: 0 12px 25px rgba(186, 117, 137, 0.35);
+        }
+
+        .game-badge-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 16px;
+            background: #FFFFFF;
+            color: #E598AC;
+            font-size: 1.35rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(186, 117, 137, 0.2);
+            border: 2px solid #FCE1E8;
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .game-trigger-box:hover .game-badge-icon {
+            transform: scale(1.15) rotate(6deg);
+            color: #8C2C4E;
+            background: #FFF;
+        }
+
+        .game-title-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: center;
+        }
+
+        .play-indicator {
+            font-size: 10px;
+            background: #E598AC;
+            color: #FFF;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: 700;
+            margin-top: 2px;
+            box-shadow: 0 2px 5px rgba(229, 152, 172, 0.4);
+        }
+
+        .play-indicator {
+            position: absolute;
+            bottom: 4px;
+            right: 6px;
+            font-size: 9px;
+            background: #E598AC;
+            color: #FFF;
+            padding: 2px 5px;
+            border-radius: 8px;
+            font-weight: 700;
+        }
+
+        /* Music Playlist Player Item (Chapter 3) */
+        .music-item-card {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: #FFF;
+            padding: 0.8rem 1.2rem;
+            border-radius: 20px;
+            border: 2px dashed rgba(194, 118, 142, 0.4);
+            margin-bottom: 0.8rem;
+            transition: all 0.3s ease;
+        }
+        .music-item-card:hover {
+            transform: translateX(6px);
+            background: #FFF0F4;
+            border-color: #E598AC;
+        }
+        .music-disc-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #E598AC;
+            color: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            animation: spinDisc 6s linear infinite;
+        }
+        @keyframes spinDisc {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Handwritten Letter */
+        .handwritten-letter {
+            font-family: 'Marck Script', cursive;
+            font-size: 1.9rem;
+            color: #5C3243;
+            line-height: 1.6;
+            text-align: center;
+            background: #FFF;
+            padding: 1.5rem;
+            border-radius: 20px;
+            border: 2px dashed rgba(194, 118, 142, 0.4);
+        }
+
+        /* Social Bubble Group */
+        .social-bubble-group {
+            display: flex;
+            gap: 0.9rem;
+            margin-top: 0.8rem;
+        }
+
+        .social-circle-btn {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #FFF;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 1.25rem;
+            text-decoration: none;
+            box-shadow: 0 6px 16px rgba(229, 152, 172, 0.35);
+            border: 2px solid rgba(247, 202, 214, 0.8);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .social-circle-btn:hover {
+            transform: translateY(-6px) scale(1.12) rotate(6deg);
+            background: #FFF0F4;
+            color: #A34867;
+        }
+
+        /* Video Modal Popup (Elastic Cartoon Physics) */
+        .video-modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(45, 35, 53, 0.65);
+            backdrop-filter: blur(10px);
+            z-index: 10000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1.5rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+
+        .video-modal-backdrop.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .video-window {
+            background: #FFF0F4;
+            border: 3px solid #E598AC;
+            border-radius: 32px;
+            width: 100%;
+            max-width: 760px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            overflow: hidden;
+            transform: translateY(120px) scale(0.85);
+            transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .video-modal-backdrop.open .video-window {
+            transform: translateY(0) scale(1);
+        }
+
+        .video-header-bar {
+            background: #E598AC;
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #FFF;
+            font-weight: 700;
+        }
+
+        .modal-title {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1.1rem;
+        }
+
+        .modal-close-btn {
+            background: #FFF;
+            border: none;
+            color: #C2768E;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-weight: 800;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+            transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .modal-close-btn:hover {
+            transform: scale(1.2) rotate(90deg);
+            background: #F7CAD6;
+        }
+
+        .video-player-frame {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-player-frame iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-footer-tag {
+            padding: 1rem 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Floating Cute Kitten */
+        .corner-kitten {
+            position: fixed;
+            bottom: 25px;
+            right: 35px;
+            width: 85px;
+            z-index: 100;
+            cursor: pointer;
+            filter: drop-shadow(0 10px 15px rgba(92, 50, 67, 0.25));
+            animation: petFloat 3s infinite ease-in-out;
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .corner-kitten:hover {
+            transform: scale(1.2) rotate(8deg);
+        }
+
+        @keyframes petFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+
+
+        /* ================= COMPREHENSIVE RESPONSIVE DESIGN (MOBILE & TABLET) ================= */
+        .mobile-avatar-frame {
+            display: none;
+        }
+
+        .mobile-epilogue-card {
+            display: none;
+        }
+
+        @media (hover: none) {
+            #customCursor { display: none !important; }
+            body, * { cursor: auto !important; }
+        }
+
+        @media (max-width: 768px) {
+            #customCursor { display: none !important; }
+            body, * { cursor: auto !important; }
+
+            /* Giữ nguyên nền hoa lá viền nguyên bản đồng bộ, mượt mà */
+            .bg-artwork-overlay {
+                background-image: url('assets/image/bg_artwork.png') !important;
+                background-size: cover !important;
+                background-position: center !important;
+                opacity: 0.75 !important;
+            }
+
+            /* Header on Mobile: Just clean centered logo 'iry bae ♡', hide all extra nav pills */
+            header {
+                padding: 0.85rem 1rem;
+                justify-content: center;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+                background: rgba(253, 232, 237, 0.88);
+            }
+
+            .logo {
+                font-size: 1.6rem;
+                margin: 0 auto;
+            }
+
+            .nav-menu {
+                display: none !important; /* Bỏ toàn bộ nội dung phụ trên thanh bar */
+            }
+
+            /* On Mobile: Tắt hoàn toàn sticky avatar bay lượn để không che chữ và không bị lag */
+            .avatar-mascot-container {
+                display: none !important;
+            }
+
+            /* Static Prologue Avatar on Mobile */
+            .mobile-avatar-frame {
+                display: block;
+                width: 140px;
+                height: 140px;
+                margin: 0 auto 1.2rem;
+                border-radius: 50%;
+                border: 6px solid rgba(229, 152, 172, 0.8);
+                box-shadow: 0 12px 30px rgba(186, 117, 137, 0.35);
+                overflow: hidden;
+                background: #FDE8ED;
+            }
+
+            .mobile-avatar-frame img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                display: block;
+            }
+
+            /* Sections & Natural Scrolling on Mobile */
+            section {
+                min-height: 80vh;
+                padding: 4rem 1rem 3rem;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+            #prologue {
+                padding-top: 6rem;
+                min-height: 85vh;
+            }
+
+            #prologue .section-container {
+                padding-top: 0;
+                min-height: auto;
+                justify-content: center;
+                text-align: center;
+            }
+
+            .prologue-title {
+                font-size: 2.2rem;
+            }
+
+            .prologue-story-quote {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+
+            #chapter1 .section-container,
+            #chapter2 .section-container,
+            #chapter3 .section-container,
+            #chapter4 .section-container,
+            #epilogue .section-container {
+                justify-content: center !important;
+                align-items: center;
+                min-height: auto;
+                width: 100%;
+            }
+
+            /* Bento Cards on Mobile: Tự nhiên, rõ ràng, không bị hiệu ứng phức tạp */
+            .bento-card {
+                opacity: 1 !important;
+                transform: none !important;
+                max-width: 440px;
+                width: 100%;
+                margin: 0 auto;
+                padding: 1.4rem 1.1rem;
+                border-radius: 26px;
+            }
+
+            .bento-title {
+                font-size: 1.75rem;
+            }
+
+            .bento-desc {
+                font-size: 0.92rem;
+                line-height: 1.5;
+            }
+
+            /* Chapter 2 Game Grid Mobile */
+            .interactive-games-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.4rem;
+            }
+
+            .game-trigger-box {
+                padding: 0.65rem 0.2rem;
+                border-radius: 14px;
+                gap: 0.25rem;
+            }
+
+            .game-badge-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 0.72rem;
+            }
+
+            .game-title-tag {
+                font-size: 0.7rem;
+            }
+
+            .play-indicator {
+                font-size: 0.58rem;
+                padding: 1px 4px;
+            }
+
+            /* 5. Epilogue Mobile Standalone Card */
+            .mobile-epilogue-card {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                background: rgba(255, 240, 244, 0.95);
+                border: 2px dashed rgba(194, 118, 142, 0.6);
+                border-radius: 28px;
+                padding: 1.8rem 1.2rem;
+                box-shadow: var(--shadow-soft);
+                width: 100%;
+                max-width: 440px;
+                margin: 0 auto;
+            }
+
+            .blessing-title {
+                font-size: 1.55rem;
+            }
+
+            .blessing-quote {
+                font-size: 0.95rem;
+                line-height: 1.55;
+            }
+
+            /* Kitten on Mobile */
+            .corner-kitten {
+                bottom: 12px;
+                right: 12px;
+                width: 46px;
+            }
+
+
+
+            /* Modals on Mobile */
+            .video-window {
+                border-radius: 20px;
+                max-width: 94vw;
+            }
+
+            .video-header-bar {
+                padding: 0.75rem 1rem;
+                font-size: 0.88rem;
+            }
+        }
+
+        /* ================= VISUAL CLICK-TO-EDIT HOVER CUES (Active in Studio CMS) ================= */
+        .is-embedded-in-studio [data-edit-target] {
+            cursor: pointer !important;
+            transition: all 0.2s cubic-bezier(0.25, 1, 0.5, 1) !important;
+            position: relative;
+        }
+        .is-embedded-in-studio [data-edit-target]:hover {
+            outline: 2.5px dashed #FF5E8E !important;
+            outline-offset: 4px !important;
+            background-color: rgba(255, 94, 142, 0.08) !important;
+            border-radius: 10px !important;
+            box-shadow: 0 4px 15px rgba(255, 94, 142, 0.2) !important;
+        }
+        .is-embedded-in-studio [data-edit-target]:active {
+            transform: scale(0.98) !important;
+        }
+
+        /* ================= ULTRA-WIDE / 4K SCREEN FIX ================= */
+        @media (min-width: 1281px) {
+            /* Giữ khoảng cách cố định giữa Mascot và tâm màn hình, không dùng % để tránh văng xa */
+            body.state-c1 .avatar-mascot-container,
+            body.state-c3 .avatar-mascot-container {
+                left: calc(50% - 340px) !important;
+            }
+            body.state-c2 .avatar-mascot-container,
+            body.state-c4 .avatar-mascot-container {
+                left: calc(50% + 340px) !important;
+            }
+        }
+
+        @media (min-width: 2560px) {
+            /* Chặn background và header không dãn rộng quá mức 2K trên màn hình 4K */
+            .bg-artwork-overlay, header, .progress-bar {
+                left: 50% !important;
+                transform: translateX(-50%) !important;
+                width: 2560px !important;
+                max-width: 100vw !important;
+            }
+        }
+    </style>
+</head>
+<body class="state-prologue">
+
+    <!-- Scroll Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Artwork Background Frame Overlay (Hoa bướm lá viền nguyên bản) -->
+    <div class="bg-artwork-overlay"></div>
+
+    <!-- Heart / Sparkle Cursor Follower -->
+    <div id="customCursor">🌸</div>
+
+    <!-- Mèo ngoan góc màn hình tương tác -->
+    <img src="assets/image/kitten.png" class="corner-kitten" id="kittenPet" alt="Cute Kitten" onerror="this.src='assets/image/download.png'" title="Click for love! ♡">
+
+    <!-- ================= STICKY CENTRAL MASCOT ================= -->
+    <div class="avatar-mascot-container" id="mascotContainer" data-edit-target="inputAvatarUrl" title="iry bae Mascot Avatar">
+        <div class="avatar-mascot-wrapper" id="mascotWrapper">
+            
+            <!-- Mat Truoc: Anh Avatar -->
+            <div class="mascot-front-face">
+                <img src="assets/image/avatar.jpg" class="dynamic-avatar" id="avatarImg" alt="iry bae Mascot Avatar" onerror="this.src='assets/image/avatar.jpg'">
+            </div>
+
+            <!-- Mặt Sau: Mã QR Donate Cute xuất hiện tức thì khi rê chuột -->
+            <div class="mascot-back-face" data-edit-target="inputQrData" onclick="openDonateModal()">
+                <div class="mascot-qr-frame"><img class="dynamic-qr" data-size="250" src="https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https://meowy-sanctuary.irybae.com/donate&color=A34867&bgcolor=FFF0F4" alt="Donate QR Code">
+                </div>
+                <div class="qr-donor-title">Scan & Support ♡</div>
+                <div class="qr-donor-subtitle">Click to enlarge QR</div>
+            </div>
+
+            <!-- Lớp Nội Dung Lời Chúc (Chỉ hiện khi mascot nhập và mở rộng ở Epilogue) -->
+            <div class="mascot-inner-blessing">
+                <span class="chapter-badge" style="background: #A34867; margin-bottom: 0.8rem;">💖 EPILOGUE • A WISH FOR YOU</span>
+                <h2 class="blessing-title" id="epilogue-title" style="margin-bottom: 0.6rem;">Keep Going & Shine Bright! ✨</h2>
+                <p class="blessing-quote" id="epilogue-quote" style="margin-bottom: 1.2rem;">
+                    "No matter how tough today gets, always remember how truly special you are.<br>
+                    Keep moving forward, your dreams will blossom beautifully like sweet sakura blossoms! ♡"
+                </p>
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="#discord" id="discord-btn" data-edit-target="inputSocialDiscord" class="social-circle-btn" style="width: auto; padding: 0.75rem 1.6rem; border-radius: 24px; font-size: 0.9rem; font-weight: 700; gap: 8px;">
+                        <i class="fa-brands fa-discord"></i> Join ME♡WY Discord
+                    </a>
+                    <button onclick="openDonateModal()" data-edit-target="inputBankName" class="social-circle-btn" style="width: auto; padding: 0.75rem 1.6rem; border-radius: 24px; font-size: 0.9rem; font-weight: 700; gap: 8px; background: #C2768E; color: #FFF; border: none; cursor: pointer;">
+                        <i class="fa-solid fa-heart"></i> Open Donate QR
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Navigation Header (Tổng cộng 6 phần riêng biệt) -->
+    <header>
+        <a href="#prologue" class="logo" data-edit-target="inputNickname">iry bae ♡</a>
+        <ul class="nav-menu">
+            <li><a href="#prologue" class="nav-btn active" data-sec="prologue">✨ Prologue</a></li>
+            <li><a href="#chapter1" class="nav-btn" data-sec="chapter1">01. Our Story</a></li>
+            <li><a href="#chapter2" class="nav-btn" data-sec="chapter2">02. Play With Me</a></li>
+            <li><a href="#chapter3" class="nav-btn" data-sec="chapter3">03. Melodies</a></li>
+            <li><a href="#chapter4" class="nav-btn" data-sec="chapter4">04. Sweet Note</a></li>
+            <li><a href="#epilogue" class="nav-btn" data-sec="epilogue">💌 Epilogue</a></li>
+        </ul>
+    </header>
+
+    <!-- ================= 0. PROLOGUE: LỜI MỞ ĐẦU RIÊNG BIỆT (KHÔNG KHUNG - PURE TEXT) ================= -->
+    <section id="prologue" class="scroll-chapter" data-bg="var(--bg-prologue)" data-state="state-prologue">
+        <div class="section-container">
+            <div class="prologue-text-wrapper">
+                <span class="chapter-badge">✨ PROLOGUE</span>
+                <h1 class="prologue-title" data-edit-target="inputNickname">iry bae ♡</h1>
+                <p class="prologue-story-quote" id="prologue-quote" data-edit-target="inputPrologueQuote">
+                    "Chào mừng bạn đến với góc nhỏ của iry bae ♡!<br>
+                    Nơi tụi mình cùng nhau chơi những tựa game vui vẻ, lắng nghe những giai điệu Lo-Fi ấm áp và trò chuyện tâm sự mỗi buổi tối.<br>
+                    Cuộn xuống nhẹ nhàng để bắt đầu hành trình đáng yêu này nhé... 🌸✨"
+                </p>
+                <div class="scroll-down-hint">
+                    <span>Scroll down to begin</span>
+                    <i class="fa-solid fa-arrow-down-long"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 1. CHAPTER 01: OUR STORY ================= -->
+    <section id="chapter1" class="scroll-chapter" data-bg="var(--bg-c1)" data-state="state-c1">
+        <div class="section-container">
+            <div class="bento-card">
+                <span class="chapter-badge">🌸 CHAPTER 01 • OUR STORY</span>
+                <h2 class="bento-title" id="c1-title" data-edit-target="inputStoryTitle">About iry bae ♡</h2>
+                <p class="bento-desc" id="c1-desc" data-edit-target="inputStoryContent">
+                    Chào mừng bạn đến với góc nhỏ của iry bae! Nơi tụi mình cùng nhau chơi những tựa game vui vẻ, lắng nghe những giai điệu Lo-Fi ấm áp và trò chuyện tâm sự mỗi buổi tối. Cảm ơn bạn đã luôn là một phần tuyệt vời của đại gia đình ME♡WY Sanctuary! 🌸
+                </p>
+                <p class="bento-desc" id="c1-quote" data-edit-target="inputQuote" style="font-family: 'Itim', cursive; color: #A34867; font-size: 1.15rem;">
+                    "if it's meant to be, it will be ✧ — Hãy luôn mỉm cười và tỏa sáng rực rỡ nhé! ♡"
+                </p>
+                <div class="social-bubble-group" id="dynamic-social-group">
+                    <!-- Nơi render danh sách social link động (có hỗ trợ icon upload tùy chỉnh) -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 2. CHAPTER 02: PLAY WITH ME (Left Side - YouTube Videos) ================= -->
+    <section id="chapter2" class="scroll-chapter" data-bg="var(--bg-c2)" data-state="state-c2">
+        <div class="section-container">
+            <div class="bento-card">
+                <span class="chapter-badge">🎮 CHAPTER 02 • PLAY WITH ME</span>
+                <h2 class="bento-title" id="c2-title" data-edit-target="inputGameTitle_0">Game Highlights &amp; Streams</h2>
+                <p class="bento-desc" id="c2-desc" data-edit-target="inputGameDesc_0">
+                    Click bất kỳ tựa game dễ thương bên dưới để xem lại những khoảnh khắc gameplay tấu hài và highlight đáng nhớ cùng viewer nhé!
+                </p>
+
+                <!-- Grid 6 Game Icons (dong tu Google Sheets / Studio) -->
+                <div class="interactive-games-grid" id="games-grid">
+                    <div class="game-trigger-box" data-edit-target="inputGameTitle_0" onclick="openVideoModal('Roblox Party & Minigames', 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1')">
+                        <div class="game-badge-icon"><i class="fa-solid fa-shapes"></i></div>
+                        <span class="game-title-tag">Roblox</span>
+                        <span class="play-indicator">▶ Video</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 3. CHAPTER 03: MELODIES & VIBES (Right Side) ================= -->
+    <section id="chapter3" class="scroll-chapter" data-bg="var(--bg-c3)" data-state="state-c3">
+        <div class="section-container">
+            <div class="bento-card">
+                <span class="chapter-badge">🎵 CHAPTER 03 • MELODIES</span>
+                <h2 class="bento-title" id="c3-title" data-edit-target="inputMusicTitle">Cozy Melodies &amp; Lo-Fi Sanctuary</h2>
+                <p class="bento-desc" id="c3-desc" data-edit-target="inputMusicDesc">
+                    Bản nhạc thư giãn mỗi chiều trà thơm, góc vẽ tranh chibi và những đêm livestream ấm áp cùng đại gia đình ME♡WY:
+                </p>
+
+                <!-- Music list (dong tu Google Sheets / Studio) -->
+                <div id="music-list" data-edit-target="inputMusicEmbed">
+                    <div class="music-item-card" data-edit-target="inputMusicEmbed" onclick="openVideoModal('Sakura Afternoon Beats', 'https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1')" style="cursor: pointer;">
+                        <div class="music-disc-icon"><i class="fa-solid fa-compact-disc"></i></div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 0.9rem;">Sakura Afternoon Beats</div>
+                            <div style="font-size: 0.8rem; color: #8B5D70;">Lo-Fi Hip Hop / Chillhop</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 4. CHAPTER 04: SWEET NOTE ================= -->
+    <section id="chapter4" class="scroll-chapter" data-bg="var(--bg-c4)" data-state="state-c4">
+        <div class="section-container">
+            <div class="bento-card">
+                <span class="chapter-badge">💌 CHAPTER 04 • SWEET NOTE</span>
+                <h2 class="bento-title" id="c4-title" data-edit-target="inputSweetNote">A Letter To You</h2>
+                <div class="handwritten-letter" id="c4-letter" data-edit-target="inputSweetNote">
+                    "Gửi những người bạn đáng yêu của iry bae..."
+                </div>
+                <p class="bento-desc" id="c4-desc" data-edit-target="inputSweetNote" style="margin-top: 1rem; text-align: center;">
+                    Cảm ơn các bạn rất nhiều vì đã ghé thăm góc nhỏ bình yên này. Chúc bạn luôn có những ngày ngập tràn niềm vui, ánh nắng ấm áp và những nụ cười thật ngọt ngào! Mãi yêu ME♡WY Sanctuary 🌷✨
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= 5. EPILOGUE: A WISH FOR YOU ================= -->
+    <section id="epilogue" class="scroll-chapter" data-bg="var(--bg-epilogue)" data-state="state-epilogue">
+        <div class="section-container">
+            <!-- Standalone Epilogue Card for Mobile (Desktop uses sticky mascot expansion) -->
+            <div class="mobile-epilogue-card">
+                <span class="chapter-badge" style="background: #A34867; margin-bottom: 0.8rem;">💖 EPILOGUE • A WISH FOR YOU</span>
+                <h2 class="blessing-title" id="mobile-epilogue-title" style="margin-bottom: 0.6rem;">Keep Going &amp; Shine Bright! ✨</h2>
+                <p class="blessing-quote" id="mobile-epilogue-quote" style="margin-bottom: 1.2rem;">
+                    "Dù hôm nay có mệt mỏi hay nhiều thử thách đến đâu, hãy luôn nhớ rằng bạn là một điều vô cùng đặc biệt.<br>
+                    Cứ vững bước tiến lên, ước mơ của bạn sẽ nở rộ rực rỡ như những đóa hoa anh đào ngọt ngào nhất! ♡"
+                </p>
+                <div style="display: flex; gap: 0.8rem; justify-content: center; flex-wrap: wrap;">
+                    <a href="https://discord.gg/irybae" id="mobile-discord-btn" class="social-circle-btn" style="width: auto; padding: 0.75rem 1.4rem; border-radius: 24px; font-size: 0.88rem; font-weight: 700; gap: 8px;">
+                        <i class="fa-brands fa-discord"></i> Join ME♡WY Discord
+                    </a>
+                    <button onclick="openDonateModal()" class="social-circle-btn" style="width: auto; padding: 0.75rem 1.4rem; border-radius: 24px; font-size: 0.88rem; font-weight: 700; gap: 8px; background: #C2768E; color: #FFF; border: none; cursor: pointer;">
+                        <i class="fa-solid fa-heart"></i> Open Donate QR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= DONATE QR POPUP MODAL ================= -->
+    <div class="video-modal-backdrop" id="donateModalBackdrop" onclick="closeDonateModal(event)">
+        <div class="video-window" style="max-width: 480px; text-align: center; background: #FFF0F4;" onclick="event.stopPropagation()">
+            <div class="video-header-bar">
+                <div class="modal-title">
+                    <i class="fa-solid fa-heart" style="color: #FFF;"></i>
+                    <span>Support & Donate iry bae ♡</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeDonateModal()">✕</button>
+            </div>
+            <div style="padding: 2rem 1.5rem; display: flex; flex-direction: column; align-items: center;">
+                <div style="background: #FFF; padding: 14px; border-radius: 24px; box-shadow: 0 10px 25px rgba(186, 117, 137, 0.25); border: 2px dashed #E598AC; margin-bottom: 1rem;">
+                    <img class="dynamic-qr" data-size="300" src="https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://meowy-sanctuary.irybae.com/donate&color=A34867&bgcolor=FFF0F4" style="width: 200px; height: 200px; border-radius: 16px; display: block;" alt="Donate QR Large">
+                </div>
+                <h3 style="font-family: 'Cheri', cursive; font-size: 1.8rem; color: #8C2C4E; margin-bottom: 0.4rem;">THANK YOUUU! ♡</h3>
+                <p style="font-family: 'Itim', cursive; font-size: 1.15rem; color: #8B5D70; line-height: 1.5; margin-bottom: 1.2rem;">
+                    Mỗi sự ủng hộ của bạn là nguồn động lực to lớn giúp iry bae tiếp tục sáng tạo và ra mắt nhiều nội dung đáng yêu hơn! ✨
+                </p>
+                <div style="display: flex; gap: 0.8rem; justify-content: center;">
+                    <span style="background: #FFE5EC; color: #A34867; padding: 6px 14px; border-radius: 12px; font-weight: 700; font-size: 0.85rem;">Momo / Ngân Hàng</span>
+                    <span style="background: #FFE5EC; color: #A34867; padding: 6px 14px; border-radius: 12px; font-weight: 700; font-size: 0.85rem;">Ko-fi / Paypal</span>
+                </div>
+            </div>
+            <div class="video-footer-tag" style="justify-content: center;">
+                <span>🎀 Sending endless love & gratitude to you! ♡</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= GAME FOLDER MODAL ================= -->
+    <div class="video-modal-backdrop" id="gameFolderModalBackdrop" onclick="closeGameFolderModal(event)">
+        <div class="video-window" onclick="event.stopPropagation()" style="max-height: 80vh; overflow-y: auto; background: #FFF; border-radius: 24px; max-width: 600px; width: 90%;">
+            <div class="video-header-bar" style="background: #F7CAD6; color: #5C3243; justify-content: space-between; border-radius: 24px 24px 0 0;">
+                <div class="modal-title" style="color: #5C3243; font-weight: 800;">
+                    <i class="fa-solid fa-folder-open" style="color: #A34867;"></i>
+                    <span id="modalGameFolderName">Thư Mục Game</span>
+                </div>
+                <button class="modal-close-btn" style="color: #A34867;" onclick="closeGameFolderModal()">✕</button>
+            </div>
+            <div class="p-4" id="gameFolderVideoList" style="padding: 1.5rem;">
+                <!-- Videos render động ở đây -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= VIDEO MODAL POPUP (CARTOON PHYSICS) ================= -->
+    <div class="video-modal-backdrop" id="videoModalBackdrop" onclick="closeVideoModal(event)">
+        <div class="video-window" onclick="event.stopPropagation()">
+            <div class="video-header-bar">
+                <div class="modal-title">
+                    <i class="fa-brands fa-youtube" style="color: #FFF;"></i>
+                    <span id="modalVideoTitle">Game Highlights</span>
+                </div>
+                <button class="modal-close-btn" onclick="closeVideoModal()">✕</button>
+            </div>
+            <div class="video-player-frame">
+                <iframe id="youtubeIframe" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <div class="video-footer-tag">
+                <span>🎀 Enjoy the cozy moment!</span>
+                <span>Press ✕ or Click outside to close</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- CENTRAL DATABASE & UNIFIED CMS SCRIPT -->
+    <script src="./iry_data.js?v=2"></script>
+
+    <!-- JAVASCRIPT: SCROLL DRIVEN MASCOT, VIDEO & DONATE QR MODAL -->
+    <script>
+        // ============================================================
+        // DATA SOURCE: Dan URL cua Apps Script Web App vao day
+        // Sau khi deploy Apps Script, copy URL va thay vao bien nay:
+        // ============================================================
+        const DATA_SOURCE_URL = ''; // <- DAN URL APPS SCRIPT VAO DAY
+
+        // Default fallback data (dung khi chua setup Sheets hoac fetch loi)
+        const DEFAULT_DATA = {
+            config: {
+                avatar_url: 'assets/image/avatar.jpg',
+                donate_qr_data: 'https://meowy-sanctuary.irybae.com/donate',
+                donate_url: 'https://meowy-sanctuary.irybae.com/donate',
+                tiktok_url: 'https://tiktok.com',
+                youtube_url: 'https://youtube.com',
+                instagram_url: 'https://instagram.com',
+                spotify_url: 'https://spotify.com',
+                discord_url: 'https://discord.gg/irybae',
+                facebook_url: 'https://facebook.com/irybae',
+                site_title: 'iry bae ♡',
+                prologue_quote: '"Chào mừng bạn đến với góc nhỏ của iry bae ♡!\nNơi tụi mình cùng nhau chơi những tựa game vui vẻ, lắng nghe những giai điệu Lo-Fi ấm áp và trò chuyện tâm sự mỗi buổi tối.\nCuộn xuống nhẹ nhàng để bắt đầu hành trình đáng yêu này nhé... 🌸✨"',
+                c1_title: 'About iry bae ♡',
+                c1_desc: 'Chào mừng bạn đến với góc nhỏ của iry bae! Nơi tụi mình cùng nhau chơi những tựa game vui vẻ, lắng nghe những giai điệu Lo-Fi ấm áp và trò chuyện tâm sự mỗi buổi tối. Cảm ơn bạn đã luôn là một phần tuyệt vời của đại gia đình ME♡WY Sanctuary! 🌸',
+                c1_quote: '"if it\'s meant to be, it will be ✧ — Hãy luôn mỉm cười và tỏa sáng rực rỡ nhé! ♡"',
+                c3_title: 'Cozy Melodies & Lo-Fi Sanctuary',
+                c3_desc: 'Bản nhạc thư giãn mỗi chiều trà thơm, góc vẽ tranh chibi và những đêm livestream ấm áp cùng đại gia đình ME♡WY:',
+                c4_letter: '"Gửi những người bạn đáng yêu của iry bae..."',
+                c4_desc: 'Cảm ơn các bạn rất nhiều vì đã ghé thăm góc nhỏ bình yên này. Chúc bạn luôn có những ngày ngập tràn niềm vui, ánh nắng ấm áp và những nụ cười thật ngọt ngào! Mãi yêu ME♡WY Sanctuary 🌷✨',
+                epilogue_title: 'Keep Going & Shine Bright! ✨',
+                epilogue_quote: '"Dù hôm nay có mệt mỏi hay nhiều thử thách đến đâu, hãy luôn nhớ rằng bạn là một điều vô cùng đặc biệt.\nCứ vững bước tiến lên, ước mơ của bạn sẽ nở rộ rực rỡ như những đóa hoa anh đào ngọt ngào nhất! ♡"',
+            },
+            games: [
+                { id: 'roblox', name: 'Roblox', title: 'Roblox Party & Minigames', desc: 'Những buổi tối quẩy minigames vui nhộn cùng viewer: Dress To Impress, trốn tìm kinh dị, chạy trốn meme và custom room cùng fan!', youtube_embed: 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1', badge_icon: 'fa-shapes' },
+                { id: 'valorant', name: 'Valorant', title: 'Valorant Clutch & Custom Room', desc: 'Những pha bắn clutch thót tim, giáo án leo rank tấu hài cùng bạn bè và các trận custom giao lưu cùng đại gia đình ME♡WY.', youtube_embed: 'https://www.youtube.com/embed/fJ9rUzIMcZQ?autoplay=1', badge_icon: 'fa-crosshairs' },
+                { id: 'minecraft', name: 'Minecraft', title: 'Minecraft Cottage & Cozy Farm', desc: 'Xây dựng ngôi làng hoa pastel bình yên, kiến trúc lâu đài cổ tích và những buổi sinh tồn survival thư giãn cùng âm nhạc lofi.', youtube_embed: 'https://www.youtube.com/embed/kJQP7kiw5Fk?autoplay=1', badge_icon: 'fa-cubes' },
+                { id: 'genshin', name: 'Genshin', title: 'Genshin Gacha & Khám Phá Teyvat', desc: 'Khám phá cốt truyện, chu du thế giới mở Teyvat và những màn roll nhân vật gacha hồi hộp đau tim cùng kênh chat.', youtube_embed: 'https://www.youtube.com/embed/3JZ_D3ELwOQ?autoplay=1', badge_icon: 'fa-wand-magic-sparkles' },
+                { id: 'lol', name: 'LoL Party', title: 'League of Legends ARAM Fun', desc: 'Những trận ARAM xả stress cuối tuần quẩy skill tưng bừng cùng các bạn trong Discord ME♡WY.', youtube_embed: 'https://www.youtube.com/embed/2g811Eo7K8U?autoplay=1', badge_icon: 'fa-shield-heart' },
+                { id: 'stardew', name: 'Stardew', title: 'Stardew Valley Farm Tour', desc: 'Trồng hoa, nuôi bò gà và trang trí nông trại bốn mùa thư giãn cùng các tình yêu.', youtube_embed: 'https://www.youtube.com/embed/ot7uXNQskDU?autoplay=1', badge_icon: 'fa-seedling' },
+            ],
+            music: [
+                { title: 'Sakura Afternoon Beats', subtitle: 'Lo-Fi Hip Hop / Chillhop', youtube_embed: 'https://www.youtube.com/embed/5qap5aO4i9A?autoplay=1', icon: 'compact-disc' },
+                { title: 'Dreamy Piano Garden', subtitle: 'Cozy Peaceful Melodies', youtube_embed: 'https://www.youtube.com/embed/ot7uXNQskDU?autoplay=1', icon: 'music' },
+                { title: 'Moonlight Whispers', subtitle: 'Aesthetic Lofi Beats for Sleep', youtube_embed: 'https://www.youtube.com/embed/jfKfPfyJRdk?autoplay=1', icon: 'moon' },
+            ]
+        };
+
+        // Helper ham tranh loi XSS va ki tu dac biet
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+
+        // Ham generate QR URL tu donate data URL
+        function makeQrUrl(data, size) {
+            return `https://api.qrserver.com/v1/create-qr-code/?size=${size}x${size}&data=${encodeURIComponent(data)}&color=A34867&bgcolor=FFF0F4`;
+        }
+
+        // Ham apply data vao DOM (cap nhat tuc thi moi thay doi tren live preview)
+        function applyData(data) {
+            // Adapt from new schema to local cfg variables
+            const cfg = {};
+            if (data.profile || data.chapters) {
+                cfg.site_title = data.profile?.name || '';
+                cfg.avatar_url = data.profile?.avatar || '';
+                cfg.c1_quote = data.profile?.quote || '';
+
+                cfg.prologue_quote = data.chapters?.prologue?.quote || '';
+                cfg.c1_title = data.chapters?.chapter1?.title || '';
+                cfg.c1_desc = data.chapters?.chapter1?.desc || '';
+                cfg.c2_title = data.chapters?.chapter2?.title || '';
+                cfg.c2_desc = data.chapters?.chapter2?.desc || '';
+                cfg.c3_title = data.chapters?.chapter3?.title || '';
+                cfg.c3_desc = data.chapters?.chapter3?.desc || '';
+                cfg.c4_letter = data.chapters?.chapter4?.letter || '';
+                cfg.c4_desc = data.chapters?.chapter4?.desc || '';
+
+                cfg.epilogue_title = DEFAULT_DATA.config.epilogue_title;
+                cfg.epilogue_quote = DEFAULT_DATA.config.epilogue_quote;
+
+                cfg.donate_qr_image = data.donate?.qr_image || '';
+                cfg.donate_qr_data = data.donate?.qr_data || '';
+                cfg.discord_url = data.socials?.discord || '';
+            } else {
+                Object.assign(cfg, data.config || DEFAULT_DATA.config);
+            }
+            const games = (data.games && data.games.length) ? data.games : DEFAULT_DATA.games;
+            const music = (data.music && data.music.length) ? data.music : DEFAULT_DATA.music;
+
+            // --- Site Title / Nickname ---
+            if (cfg.site_title) {
+                document.querySelectorAll('.logo').forEach(el => el.textContent = cfg.site_title);
+                const proTitle = document.querySelector('.prologue-title');
+                if (proTitle) proTitle.textContent = cfg.site_title;
+            }
+
+            // --- Avatar ---
+            const avatarImg = document.getElementById('avatarImg');
+            if (avatarImg && cfg.avatar_url) avatarImg.src = cfg.avatar_url;
+
+            // --- QR Donate (tao tu donate_qr_data) ---
+            const qrData = cfg.donate_qr_data || DEFAULT_DATA.config.donate_qr_data;
+            document.querySelectorAll('.dynamic-qr').forEach(img => {
+                const size = img.dataset.size || '250';
+                if (cfg.donate_qr_image) {
+                    img.src = cfg.donate_qr_image;
+                } else {
+                    img.src = makeQrUrl(qrData, size);
+                }
+            });
+
+            // --- Dynamic Social Links (Hỗ trợ Custom Icon từ Studio) ---
+            const socialGroup = document.getElementById('dynamic-social-group');
+            if (socialGroup && data.social_links) {
+                socialGroup.innerHTML = data.social_links.map(s => {
+                    const safeUrl = escapeHtml(s.url);
+                    const safeName = escapeHtml(s.name);
+                    if (s.icon) {
+                        return `<a href="${safeUrl}" target="_blank" class="social-circle-btn" style="padding:0; overflow:hidden;" title="${safeName}">
+                                    <img src="${escapeHtml(s.icon)}" style="width:100%;height:100%;object-fit:cover;">
+                                </a>`;
+                    } else {
+                        // Fallback icon mặc định tự nhận diện theo tên
+                        let iconClass = 'fa-link';
+                        const n = safeName.toLowerCase();
+                        if (n.includes('tiktok')) iconClass = 'fa-tiktok';
+                        else if (n.includes('youtube')) iconClass = 'fa-youtube';
+                        else if (n.includes('instagram')) iconClass = 'fa-instagram';
+                        else if (n.includes('discord')) iconClass = 'fa-discord';
+                        else if (n.includes('facebook')) iconClass = 'fa-facebook';
+                        else if (n.includes('spotify')) iconClass = 'fa-spotify';
+                        else if (n.includes('twitter') || n.includes('x')) iconClass = 'fa-x-twitter';
+
+                        return `<a href="${safeUrl}" target="_blank" class="social-circle-btn" title="${safeName}">
+                                    <i class="fa-brands ${iconClass}"></i>
+                                </a>`;
+                    }
+                }).join('');
+            }
+
+            // --- Chapter 1 text ---
+            const c1Title = document.getElementById('c1-title');
+            if (c1Title && cfg.c1_title) c1Title.textContent = cfg.c1_title;
+            const c1Desc = document.getElementById('c1-desc');
+            if (c1Desc && cfg.c1_desc) c1Desc.textContent = cfg.c1_desc;
+            const c1Quote = document.getElementById('c1-quote');
+            if (c1Quote && cfg.c1_quote) c1Quote.textContent = cfg.c1_quote;
+
+            // --- Prologue text ---
+            const prologueQuote = document.getElementById('prologue-quote');
+            if (prologueQuote && cfg.prologue_quote) {
+                prologueQuote.innerHTML = cfg.prologue_quote.replace(/\n/g, '<br>');
+            }
+
+            // --- Chapter 2: Game Section Title & Desc ---
+            const c2Title = document.getElementById('c2-title');
+            if (c2Title && cfg.c2_title) c2Title.textContent = cfg.c2_title;
+            const c2Desc = document.getElementById('c2-desc');
+            if (c2Desc && cfg.c2_desc) c2Desc.textContent = cfg.c2_desc;
+
+            // --- Chapter 3: Melodies Title & Desc ---
+            const c3Title = document.getElementById('c3-title');
+            if (c3Title && cfg.c3_title) c3Title.textContent = cfg.c3_title;
+            const c3Desc = document.getElementById('c3-desc');
+            if (c3Desc && cfg.c3_desc) c3Desc.textContent = cfg.c3_desc;
+
+            // --- Chapter 4: Sweet Note ---
+            const c4Letter = document.getElementById('c4-letter');
+            if (c4Letter && cfg.c4_letter) c4Letter.textContent = cfg.c4_letter;
+            const c4Desc = document.getElementById('c4-desc');
+            if (c4Desc && cfg.c4_desc) c4Desc.textContent = cfg.c4_desc;
+
+            // --- Epilogue ---
+            const epTitle = document.getElementById('epilogue-title');
+            if (epTitle && cfg.epilogue_title) epTitle.textContent = cfg.epilogue_title;
+            const epQuote = document.getElementById('epilogue-quote');
+            if (epQuote && cfg.epilogue_quote) {
+                epQuote.innerHTML = cfg.epilogue_quote.replace(/\n/g, '<br>');
+            }
+            const mobEpTitle = document.getElementById('mobile-epilogue-title');
+            if (mobEpTitle && cfg.epilogue_title) mobEpTitle.textContent = cfg.epilogue_title;
+            const mobEpQuote = document.getElementById('mobile-epilogue-quote');
+            if (mobEpQuote && cfg.epilogue_quote) {
+                mobEpQuote.innerHTML = cfg.epilogue_quote.replace(/\n/g, '<br>');
+            }
+            const mobDiscord = document.getElementById('mobile-discord-btn');
+            if (mobDiscord && cfg.discord_url) mobDiscord.href = cfg.discord_url;
+
+            // Update all avatars (desktop + mobile)
+            document.querySelectorAll('.dynamic-avatar').forEach(img => {
+                if (cfg.avatar_url) img.src = cfg.avatar_url;
+            });
+
+            // --- Chapter 2: Game Grid (render động với folder view) ---
+            globalGamesData = games;
+            const gamesGrid = document.getElementById('games-grid');
+            if (gamesGrid && games.length) {
+                gamesGrid.innerHTML = games.map((g, idx) => `
+                    <div class="game-trigger-box" data-edit-target="inputGameName_${idx}" onclick="openGameFolderModal(${idx})">
+                        <div class="game-badge-icon" style="overflow:hidden; display:flex; align-items:center; justify-content:center;">
+                            ${g.custom_icon 
+                                ? `<img src="${g.custom_icon}" style="width:100%; height:100%; object-fit:contain; padding:2px;">` 
+                                : `<i class="fa-solid ${g.badge_icon || 'fa-folder-open'}"></i>`
+                            }
+                        </div>
+                        <span class="game-title-tag">${escapeHtml(g.name || 'Game ' + (idx + 1))}</span>
+                        <span class="play-indicator" style="background:#FFF5F7; color:#A34867; padding:2px 8px; border-radius:8px; font-size:0.75rem;"><i class="fa-solid fa-film"></i> ${g.videos ? g.videos.length : 0} Videos</span>
+                    </div>
+                `).join('');
+            }
+
+            // --- Chapter 3: Music Embed (render trực tiếp) ---
+            const musicList = document.getElementById('music-list');
+            if (musicList && music.length > 0) {
+                let rawUrl = music[0].youtube_embed || '';
+                let finalUrl = rawUrl;
+
+                if (rawUrl.includes('<iframe') && rawUrl.includes('src=')) {
+                    const match = rawUrl.match(/src=["']([^"']+)["']/);
+                    if (match && match[1]) finalUrl = match[1];
+                }
+
+                if (finalUrl.includes('youtube.com/watch?v=')) {
+                    finalUrl = finalUrl.replace('youtube.com/watch?v=', 'youtube.com/embed/');
+                    finalUrl = finalUrl.split('&')[0];
+                } else if (finalUrl.includes('youtu.be/')) {
+                    finalUrl = finalUrl.replace('youtu.be/', 'youtube.com/embed/');
+                } else if (finalUrl.includes('spotify.com/')) {
+                    if (!finalUrl.includes('spotify.com/embed/')) {
+                        finalUrl = finalUrl.replace('spotify.com/', 'spotify.com/embed/');
+                    }
+                }
+
+                if (finalUrl) {
+                    musicList.innerHTML = `
+                        <div style="border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(229,152,172,0.15); background: #fff;">
+                            <iframe width="100%" height="352" src="${finalUrl}" title="Music Player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" allowfullscreen style="display: block; border-radius: 16px;"></iframe>
+                        </div>
+                    `;
+                } else {
+                    musicList.innerHTML = '';
+                }
+            }
+        }
+
+        // Main: fetch từ Centralized IRY_CMS hoặc fallback
+        async function loadFromSheets() {
+            let cmsData = window.IRY_CMS ? IRY_CMS.data : DEFAULT_DATA;
+            if (window.IRY_CMS) {
+                // Bước 1: Init dữ liệu gốc từ DB (nếu có URL)
+                cmsData = await IRY_CMS.init({ url: DATA_SOURCE_URL });
+                
+                // Bước 2: NẾU ĐANG CHẠY DƯỚI DẠNG PREVIEW CỦA STUDIO -> Ưu tiên lấy cache của Studio đè lên
+                try {
+                    const cached = localStorage.getItem('IRY_CMS_CACHE');
+                    if (cached) {
+                        const parsedCache = JSON.parse(cached);
+                        IRY_CMS.mergeData(parsedCache);
+                        cmsData = IRY_CMS.data; // Cập nhật lại biến cmsData
+                    }
+                } catch(e) {}
+            }
+            
+            // Adapt unified schema into scroll components
+            const adapted = {
+                config: {
+                    site_title: cmsData.profile ? cmsData.profile.name : undefined,
+                    avatar_url: cmsData.profile ? cmsData.profile.avatar : './assets/image/avatar.jpg',
+                    donate_qr_image: cmsData.donate ? cmsData.donate.qr_image : undefined,
+                    donate_qr_data: cmsData.donate ? cmsData.donate.qr_data : 'https://meowy-sanctuary.irybae.com/donate',
+                    tiktok_url: cmsData.socials ? cmsData.socials.tiktok : 'https://tiktok.com',
+                    youtube_url: cmsData.socials ? cmsData.socials.youtube : 'https://youtube.com',
+                    facebook_url: cmsData.socials ? cmsData.socials.facebook : 'https://facebook.com',
+                    instagram_url: cmsData.socials ? cmsData.socials.instagram : 'https://instagram.com',
+                    spotify_url: cmsData.socials ? cmsData.socials.spotify : 'https://spotify.com',
+                    discord_url: cmsData.socials ? cmsData.socials.discord : '#discord',
+                    prologue_quote: cmsData.chapters && cmsData.chapters.prologue ? cmsData.chapters.prologue.quote : undefined,
+                    c1_title: cmsData.chapters && cmsData.chapters.chapter1 ? cmsData.chapters.chapter1.title : undefined,
+                    c1_desc: cmsData.chapters && cmsData.chapters.chapter1 ? cmsData.chapters.chapter1.desc : undefined,
+                    c1_quote: cmsData.chapters && cmsData.chapters.chapter1 ? cmsData.chapters.chapter1.quote : undefined,
+                    c2_title: cmsData.chapters && cmsData.chapters.chapter2 ? cmsData.chapters.chapter2.title : undefined,
+                    c2_desc: cmsData.chapters && cmsData.chapters.chapter2 ? cmsData.chapters.chapter2.desc : undefined,
+                    c3_title: cmsData.chapters && cmsData.chapters.chapter3 ? cmsData.chapters.chapter3.title : undefined,
+                    c3_desc: cmsData.chapters && cmsData.chapters.chapter3 ? cmsData.chapters.chapter3.desc : undefined,
+                    c4_letter: cmsData.chapters && cmsData.chapters.chapter4 ? cmsData.chapters.chapter4.letter : undefined,
+                    c4_desc: cmsData.chapters && cmsData.chapters.chapter4 ? cmsData.chapters.chapter4.desc : undefined,
+                    epilogue_title: cmsData.chapters && cmsData.chapters.epilogue ? cmsData.chapters.epilogue.title : undefined,
+                    epilogue_quote: cmsData.chapters && cmsData.chapters.epilogue ? cmsData.chapters.epilogue.quote : undefined,
+                },
+                social_links: cmsData.social_links || [],
+                games: cmsData.games || DEFAULT_DATA.games,
+                music: cmsData.music || DEFAULT_DATA.music
+            };
+            applyData(adapted);
+        }
+
+        // Chay ngay khi DOM san sang
+        document.addEventListener('DOMContentLoaded', loadFromSheets);
+
+        const customCursor = document.getElementById('customCursor');
+        const particleIcons = ['🌸', '✨', '💖', '🐰', '🌷', '🎀', '⭐'];
+        let lastX = 0, lastY = 0;
+
+        let mouseX = 0, mouseY = 0;
+        let lastSparkleTime = 0;
+        let isCursorMoving = false;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+            
+            if (!isCursorMoving) {
+                isCursorMoving = true;
+                requestAnimationFrame(updateCursor);
+            }
+        });
+
+        function updateCursor() {
+            if (customCursor) {
+                customCursor.style.left = mouseX + 'px';
+                customCursor.style.top = mouseY + 'px';
+            }
+
+            const now = Date.now();
+            if (now - lastSparkleTime > 40) {
+                const dist = Math.hypot(mouseX - lastX, mouseY - lastY);
+                if (dist > 40) {
+                    createSparkle(mouseX, mouseY);
+                    lastX = mouseX;
+                    lastY = mouseY;
+                    lastSparkleTime = now;
+                }
+            }
+            isCursorMoving = false;
+        }
+
+        // Hover vào các item tương tác: Đổi sang bông hoa màu hồng đậm/đỏ rực rỡ 🌺
+        document.addEventListener('mouseover', (e) => {
+            const interactive = e.target.closest('a, button, [onclick], .game-trigger-box, .music-item-card, .donate-corner-widget, .avatar-mascot-container, .social-circle-btn, .nav-btn, input, textarea');
+            if (interactive && customCursor) {
+                customCursor.classList.add('hover-active');
+                customCursor.textContent = '🌺';
+            }
+        });
+
+        document.addEventListener('mouseout', (e) => {
+            const interactive = e.target.closest('a, button, [onclick], .game-trigger-box, .music-item-card, .donate-corner-widget, .avatar-mascot-container, .social-circle-btn, .nav-btn, input, textarea');
+            if (interactive && customCursor) {
+                customCursor.classList.remove('hover-active');
+                customCursor.textContent = '🌸';
+            }
+        });
+
+        function createSparkle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'trail-particle';
+            particle.innerText = particleIcons[Math.floor(Math.random() * particleIcons.length)];
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, 900);
+        }
+
+        // 2. Scroll-driven Chapters, Progress bar & Mascot Transition
+        const chapters = document.querySelectorAll('.scroll-chapter');
+        const navBtns = document.querySelectorAll('.nav-btn');
+        const progressBar = document.getElementById('progressBar');
+        const body = document.body;
+
+        function handleScroll() {
+            const scrollPos = window.scrollY;
+            const windowHeight = window.innerHeight;
+            const docHeight = document.documentElement.scrollHeight - windowHeight;
+
+            const progress = docHeight > 0 ? (scrollPos / docHeight) * 100 : 0;
+            progressBar.style.width = `${progress}%`;
+
+            let currentSecId = 'prologue';
+            let currentBg = 'var(--bg-prologue)';
+            let currentStateClass = 'state-prologue';
+
+            // Find closest chapter to viewport center (eliminates dead zones / empty void gaps)
+            let closestChapter = chapters[0];
+            let minDistance = Infinity;
+            const viewportCenter = windowHeight / 2;
+
+            chapters.forEach(chapter => {
+                const rect = chapter.getBoundingClientRect();
+                const chapterCenter = (rect.top + rect.bottom) / 2;
+                const distance = Math.abs(chapterCenter - viewportCenter);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    closestChapter = chapter;
+                }
+            });
+
+            if (closestChapter) {
+                currentSecId = closestChapter.id;
+                currentBg = closestChapter.getAttribute('data-bg') || 'var(--bg-prologue)';
+                currentStateClass = closestChapter.getAttribute('data-state') || 'state-prologue';
+            }
+
+            body.style.backgroundColor = currentBg;
+
+            const stateClasses = ['state-prologue', 'state-c1', 'state-c2', 'state-c3', 'state-c4', 'state-epilogue'];
+            stateClasses.forEach(cls => {
+                if (cls === currentStateClass) {
+                    body.classList.add(cls);
+                } else {
+                    body.classList.remove(cls);
+                }
+            });
+
+            chapters.forEach(chapter => {
+                const card = chapter.querySelector('.bento-card');
+                if (card) {
+                    const rect = chapter.getBoundingClientRect();
+                    if (rect.top <= windowHeight * 0.88 && rect.bottom >= 40) {
+                        card.classList.add('active');
+                    } else {
+                        card.classList.remove('active');
+                    }
+                }
+            });
+
+            navBtns.forEach(btn => {
+                if (btn.getAttribute('data-sec') === currentSecId) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+
+        // 3. Video & Game Folder Modal Handlers
+        let globalGamesData = [];
+        const videoModal = document.getElementById('videoModalBackdrop');
+        const youtubeIframe = document.getElementById('youtubeIframe');
+        const modalVideoTitle = document.getElementById('modalVideoTitle');
+
+        function openVideoModal(title, videoUrl) {
+            modalVideoTitle.innerText = title;
+            
+            // Auto convert standard youtube url to embed url
+            let finalUrl = videoUrl || '';
+
+            // Nếu người dùng dán toàn bộ thẻ <iframe ... src="...">, tự động trích xuất src
+            if (finalUrl.includes('<iframe') && finalUrl.includes('src=')) {
+                const match = finalUrl.match(/src=["']([^"']+)["']/);
+                if (match && match[1]) {
+                    finalUrl = match[1];
+                }
+            }
+
+            if (finalUrl.includes('youtube.com/watch?v=')) {
+                finalUrl = finalUrl.replace('youtube.com/watch?v=', 'youtube.com/embed/');
+                // Xóa phần tham số đằng sau nếu có
+                finalUrl = finalUrl.split('&')[0];
+                if (!finalUrl.includes('?autoplay=1')) {
+                    finalUrl += '?autoplay=1';
+                }
+            } else if (finalUrl.includes('youtu.be/')) {
+                finalUrl = finalUrl.replace('youtu.be/', 'youtube.com/embed/');
+                if (!finalUrl.includes('?autoplay=1')) {
+                    finalUrl += '?autoplay=1';
+                }
+            } else if (finalUrl.includes('spotify.com/')) {
+                if (!finalUrl.includes('spotify.com/embed/')) {
+                    finalUrl = finalUrl.replace('spotify.com/', 'spotify.com/embed/');
+                }
+            }
+
+            youtubeIframe.src = finalUrl;
+            videoModal.classList.add('open');
+
+            for (let i = 0; i < 15; i++) {
+                setTimeout(() => {
+                    createSparkle(window.innerWidth / 2 + (Math.random() * 200 - 100), window.innerHeight / 2 + (Math.random() * 200 - 100));
+                }, i * 30);
+            }
+        }
+
+        function closeVideoModal() {
+            videoModal.classList.remove('open');
+            youtubeIframe.src = '';
+        }
+
+        // --- Game Folder Handlers ---
+        const gameFolderModal = document.getElementById('gameFolderModalBackdrop');
+
+        function openGameFolderModal(gameIndex) {
+            const g = globalGamesData[gameIndex];
+            if (!g) return;
+            document.getElementById('modalGameFolderName').textContent = g.name || 'Game Videos';
+            
+            const listContainer = document.getElementById('gameFolderVideoList');
+            const videos = g.videos || [];
+            
+            if (videos.length === 0) {
+                listContainer.innerHTML = `<div style="text-align:center; padding: 2rem; color:#8B5D70; font-family:'Itim', cursive;">Chưa có video nào trong danh mục này! 🌸</div>`;
+            } else {
+                listContainer.innerHTML = videos.map(v => `
+                    <div class="music-item-card" onclick="openVideoModal('${escapeHtml(v.title || g.name)}', '${v.youtube_embed || ''}')" style="cursor:pointer; margin-bottom: 0.8rem; background: #FFF5F7; border: 2px dashed #F7CAD6; border-radius: 16px; padding: 12px; display: flex; gap: 14px; align-items: center; transition: all 0.3s; box-shadow: 0 4px 8px rgba(0,0,0,0.02);">
+                        <div class="music-disc-icon" style="background:#FFE5EC;color:#A34867; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.1rem; box-shadow: 0 4px 8px rgba(229,152,172,0.3);">
+                            <i class="fa-solid fa-play"></i>
+                        </div>
+                        <div style="flex-grow: 1;">
+                            <div style="font-weight:700;font-size:0.95rem; color:#5C3243; line-height:1.2;">${escapeHtml(v.title || 'Video')}</div>
+                            <div style="font-size:0.75rem;color:#A34867; margin-top:4px;">${escapeHtml(v.desc || '')}</div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            gameFolderModal.classList.add('open');
+        }
+
+        function closeGameFolderModal(e) {
+            if (e && e.target !== gameFolderModal && !e.target.classList.contains('modal-close-btn')) return;
+            gameFolderModal.classList.remove('open');
+        }
+
+        // 4. Donate Modal Popup Handlers
+        const donateModal = document.getElementById('donateModalBackdrop');
+
+        function openDonateModal() {
+            donateModal.classList.add('open');
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    createSparkle(window.innerWidth / 2 + (Math.random() * 240 - 120), window.innerHeight / 2 + (Math.random() * 240 - 120));
+                }, i * 25);
+            }
+        }
+
+        function closeDonateModal() {
+            donateModal.classList.remove('open');
+        }
+
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (videoModal.classList.contains('open')) closeVideoModal();
+                if (donateModal.classList.contains('open')) closeDonateModal();
+                if (gameFolderModal.classList.contains('open')) closeGameFolderModal();
+            }
+        });
+
+        // 5. Click vào Mèo con bắn tim
+        const kittenPet = document.getElementById('kittenPet');
+        kittenPet.addEventListener('click', (e) => {
+            const rect = kittenPet.getBoundingClientRect();
+            for (let i = 0; i < 14; i++) {
+                setTimeout(() => {
+                    createSparkle(rect.left + 40 + (Math.random() * 80 - 40), rect.top + 30 + (Math.random() * 80 - 40));
+                }, i * 40);
+            }
+        });
+
+
+        // =========================================================================
+        // 7. VISUAL CLICK-TO-EDIT INJECTION SCRIPT (Connected to IRY Studio CMS)
+        // =========================================================================
+        (function initVisualClickToEdit() {
+            // Check if page is embedded in iframe (IRY Studio Dashboard)
+            const isEmbedded = (window.self !== window.top);
+            if (isEmbedded) {
+                document.documentElement.classList.add('is-embedded-in-studio');
+                console.log('🌸 [IRY Scroll] Visual Click-to-Edit mode active inside Studio CMS!');
+            }
+
+            // Global Click delegate for data-edit-target elements
+            document.addEventListener('click', function(e) {
+                const target = e.target.closest('[data-edit-target]');
+                if (!target) return;
+
+                // When inside Studio iframe, intercept click and focus Dashboard input
+                if (isEmbedded) {
+                    e.preventDefault();
+                    e.stopPropagation();
+
+                    const targetId = target.getAttribute('data-edit-target');
+                    if (targetId) {
+                        window.parent.postMessage({
+                            type: 'FOCUS_INPUT',
+                            targetId: targetId
+                        }, '*');
+                    }
+                }
+            }, true);
+        })();
+    </script>
+</body>
+</html>
+
+
